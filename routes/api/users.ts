@@ -1,11 +1,13 @@
-var mongoose = require('mongoose');
-var router = require('express').Router();
-var passport = require('passport');
-var User = mongoose.model('User');
-var auth = require('../auth');
+import mongoose from "mongoose";
+import { Request, Response, Router, NextFunction } from "express";
+import passport from "passport";
+import { model } from "mongoose";
+import { auth } from "../auth";
 
-router.get('/user', auth.required, function(req, res, next){
-  User.findById(req.payload.id).then(function(user){
+const User = model("User")
+const router = Router();
+router.get('/user', auth.required, (req: Request, res: Response, next: NextFunction) => {
+  User.findById(req.payload.id).then((user) => {
     if(!user){ return res.sendStatus(401); }
 
     return res.json({user: user.toAuthJSON()});
@@ -13,9 +15,10 @@ router.get('/user', auth.required, function(req, res, next){
 });
 
 router.put('/user', auth.required, function(req, res, next){
-  User.findById(req.payload.id).then(function(user){
-    if(!user){ return res.sendStatus(401); }
-
+  User.findById(req.payload.id).then((user) => {
+    if(!user){
+      return res.sendStatus(401);
+    }
     // only update fields that were actually passed...
     if(typeof req.body.user.username !== 'undefined'){
       user.username = req.body.user.username;
