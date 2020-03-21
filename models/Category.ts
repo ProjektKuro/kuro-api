@@ -1,4 +1,11 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Model, Document } from 'mongoose';
+
+interface ICategory extends Document {
+  name: string;
+  description: string;
+}
+interface ICategoryModel extends Model<ICategory> {
+}
 
 /**
  * Database definition for the `Category` relation
@@ -15,4 +22,4 @@ var CategorySchema = new Schema({
   description: String,
 }, { timestamps: true });
 
-export default model('Category', CategorySchema);
+export default model<ICategory, ICategoryModel>('Category', CategorySchema);

@@ -1,4 +1,12 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Model, Document } from 'mongoose';
+
+interface IProfile extends Document {
+  name: string;
+  latitude: number;
+  longitude: number;
+}
+interface IProfileModel extends Model<IProfile> {
+}
 
 /**
  * Database definition for the `User_Profile` relation
@@ -17,4 +25,4 @@ var ProfileSchema = new Schema({
   lastLogin: Date,
 }, { timestamps: true });
 
-export default model('Profile', ProfileSchema);
+export default model<IProfile, IProfileModel>('Profile', ProfileSchema);

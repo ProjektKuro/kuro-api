@@ -1,4 +1,11 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Model, Document } from 'mongoose';
+
+interface IAddress extends Document {
+  name: string;
+  description: string;
+}
+interface IAddressModel extends Model<IAddress> {
+}
 
 /**
  * Database definition for the `Address` relation
@@ -22,4 +29,4 @@ var AddressSchema = new Schema({
   postralCode: Number,
 }, { timestamps: true });
 
-export default model('Address', AddressSchema);
+export default model<IAddress, IAddressModel>('Address', AddressSchema);
