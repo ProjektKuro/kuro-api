@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const article = model("Article");
 // return a list of tags
 const router = Router();
-router.get('/', (req: Request, res: Response, next: NextFunction) {
+router.get('/', (req: Request, res: Response, next: NextFunction) => {
   article
     .find()
     .distinct('tagList')
@@ -15,4 +15,4 @@ router.get('/', (req: Request, res: Response, next: NextFunction) {
     }).catch(next);
 });
 
-module.exports = router;
+export default router;
