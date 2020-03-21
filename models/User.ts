@@ -4,15 +4,11 @@ import { pbkdf2Sync, randomBytes } from 'crypto';
 import { sign } from 'jsonwebtoken';
 var secret = require('../config').secret;
 
-
 interface IUser extends Document {
   username: string,
   email: string,
-  bio: String,
-  image: String,
 }
 interface IUserModel extends Model<IUser> {
-
 }
 
 /**

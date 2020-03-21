@@ -1,4 +1,11 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Model, Document } from 'mongoose';
+
+interface IProduct extends Document {
+  name: string;
+  description: string;
+}
+interface IProductModel extends Model<IProduct> {
+}
 
 /**
  * Database definition for the `Product` relation
@@ -19,4 +26,4 @@ var ProductSchema = new Schema({
   categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
 }, { timestamps: true });
 
-export default model('Product', ProductSchema);
+export default model<IProduct, IProductModel>('Product', ProductSchema);
