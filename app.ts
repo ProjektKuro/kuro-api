@@ -1,31 +1,27 @@
-import http from 'http';
 import path from 'path';
-import methods from 'methods';
-import express, {
-  NextFunction,
-  Request,
-  Response
-} from 'express';
-import bodyParser from 'body-parser';
+import express from 'express';
 import session from 'express-session';
 import cors from 'cors';
-import passport from 'passport';
-import errorhandler from 'errorhandler';
+import errorHandler from 'errorhandler';
 import mongoose from 'mongoose';
 import morgan from "morgan";
 import methodOverride from "method-override"
+import { urlencoded, json } from 'body-parser';
+import { config } from 'dotenv';
 
-const isProduction: boolean = process.env.NODE_ENV === 'production';
-
+import constants from './config/constants';
+const setting = constants.environment
+const isProduction: boolean = constants.environment !== 'production';
+console.log(constants)
 // Create global app object
-var app: express.Application = express();
+const app: express.Application = express();
 
 app.use(cors());
 
 // Normal express config defaults
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: false }));
+app.use(json());
 
 app.use(methodOverride());
 app.use(express.static(__dirname + '/public'));
@@ -40,11 +36,11 @@ app.use(session({
 }));
 
 if (!isProduction) {
-  app.use(errorhandler());
+  app.use(errorHandler());
 }
 
-if(isProduction){
-  mongoose.connect(process.env.MONGODB_URI);
+if (isProduction) {
+  mongoose.connect(constants.mongoConnectionString);
 } else {
   mongoose.connect('mongodb://localhost/conduit');
   mongoose.set('debug', true);
@@ -58,9 +54,10 @@ require('./config/passport');
 app.use(require('./routes'));
 
 /// catch 404 and forward to error handler
-app.use(function(req: Request, res: Response, next: NextFunction) {
+app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
   let err = new Error('Not Found');
-  err.status = 404;
+  // TODO: add status
+  // err.status = 404;
   next(err);
 });
 
@@ -69,29 +66,33 @@ app.use(function(req: Request, res: Response, next: NextFunction) {
 // development error handler
 // will print stacktrace
 if (!isProduction) {
-  app.use(function(err, req: Request, res: Response, next: NextFunction) {
+  app.use((err, req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.log(err.stack);
 
     res.status(err.status || 500);
 
-    res.json({'errors': {
-      message: err.message,
-      error: err
-    }});
+    res.json({
+      'errors': {
+        message: err.message,
+        error: err
+      }
+    });
   });
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req: Request, res: Response, next: NextFunction) {
+app.use((err, req: express.Request, res: express.Response, next: express.NextFunction) => {
   res.status(err.status || 500);
-  res.json({'errors': {
-    message: err.message,
-    error: {}
-  }});
+  res.json({
+    'errors': {
+      message: err.message,
+      error: {}
+    }
+  });
 });
 
 // finally, let's start our server...
-const server = app.listen( process.env.PORT || 3000, function(){
-  console.log('Listening on port ' + server.address().port);
+const server = app.listen(constants.port || 1337, () => {
+  console.log('Listening on port ' + constants.port);
 });
