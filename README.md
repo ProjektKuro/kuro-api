@@ -9,7 +9,7 @@ Die Komponente realisiert einen API Server, mit dem `Kuro` Clients kommunizieren
 
 Die Projekt Basis ist dieses `ExpressJs` & `MongoDb` Boilerplate Projekt von [gothinkster](./GoThinkster.md), welches wir um `Typescript`erweitert haben.
 
-Dann wurde gemeinsam ein Konzept für das Design der API entwickelt und umgesetzt, dabei wurde bereits von anfang an mit `Postman` `<HIER LINK einsetzen>` getestet, ob alles funktioniert wie geplant um keine Zeit zu verlieren.
+Dann wurde gemeinsam ein Konzept für das Design der API entwickelt und umgesetzt, dabei wurde bereits von Anfang an mit `Postman` `<HIER LINK einsetzen>` getestet, ob alles funktioniert wie geplant um keine Zeit zu verlieren.
 
 ## Ausblick
 
@@ -26,7 +26,7 @@ Um den Code zu benutzen bedarf es folgender Schritte:
 
 1. Repository klonen
 2. `Dependencies` installieren (`yarn install`)
-3. `yarn run mongo:start` zum starten einer lokalen Mongo instanz (setzt `docker` vorraus).
+3. `yarn run mongo:start` zum starten einer lokalen Mongo Instanz (setzt `docker` voraus).
 4. `yarn run dev` um die lokale Entwicklungsumgebung zu starten. (Code kann, nach Änderung, neu geladen werden).
 
 ## Dokumentation
@@ -38,14 +38,14 @@ Um den Code zu benutzen bedarf es folgender Schritte:
 
 ## Beteiligte
 
-Hier werden alle (maßgeblich) an der Entwicklung des Backends beteiligten Leute aufgelistet.
+Hier werden alle (maßgeblich) an der Entwicklung des Backend beteiligten Leute aufgelistet.
 
-### Api Design & Development
+### API Design & Development
 
-Datenbankdesgin[Tobias Lahmann](https://github.com/tlahmann)
+Datenbankdesgin [Tobias Lahmann](https://github.com/tlahmann)
 
 API Design [Sven Patrick Meier](https://github.com/svenpatrickmeier)
 
 ### Datenbeschaffungs & -parsing Lib
 
-Mapdaten für Shops [Timo Netzer](https://github.com/exodiquas)
+Kartendaten für Shops [Timo Netzer](https://github.com/exodiquas)
