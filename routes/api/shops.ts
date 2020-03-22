@@ -11,9 +11,9 @@ shopRoutes.get(
   "/shops",
   // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
-    User.find({})
-      .then(user => {
-        if (!user) {
+    Shop.find({})
+      .then(shops => {
+        if (!shops) {
           return res.sendStatus(404);
         }
 
@@ -26,7 +26,7 @@ shopRoutes.post(
   "/shops",
   // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
-    User.find({})
+    Shop.find({})
       .then(user => {
         if (!user) {
           return res.sendStatus(404);
@@ -41,7 +41,7 @@ shopRoutes.get(
   "/shops/:shopId",
   // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
-    User.findById(req.params.id)
+    Shop.findById(req.params.id)
       .then(user => {
         if (!user) {
           return res.sendStatus(404);
@@ -57,7 +57,7 @@ shopRoutes.get(
   // auth.required,
   (req, res, next) => {
     console.log(req.params.id);
-    User.findById(req.params.id)
+    Shop.findById(req.params.id)
       .then(user => {
         if (!user) {
           return res.sendStatus(401);
@@ -75,7 +75,7 @@ shopRoutes.get(
   // auth.required,
   (req, res, next) => {
     console.log(req.params.id);
-    User.findById(req.params.id)
+    Shop.findById(req.params.id)
       .then(user => {
         if (!user) {
           return res.sendStatus(401);
@@ -92,7 +92,7 @@ shopRoutes.post(
   // auth.required,
   (req, res, next) => {
     console.log(req.params.id);
-    User.findById(req.params.id)
+    Shop.findById(req.params.id)
       .then(user => {
         if (!user) {
           return res.sendStatus(401);
@@ -108,7 +108,7 @@ shopRoutes.put(
   // auth.required,
   (req, res, next) => {
     console.log(req.params.id);
-    User.findById(req.params.id)
+    Shop.findById(req.params.id)
       .then(user => {
         if (!user) {
           return res.sendStatus(401);
