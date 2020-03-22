@@ -1,36 +1,37 @@
 import { resolve as pathResolve } from 'path';
 import { config } from 'dotenv';
-
-const { env } = process;
-config({ path: pathResolve(__dirname, `./env/.env.${ env.NODE_ENV || 'development' }`) });
+import env from "node-env-file";
+env(__dirname + "/env/.env.development");
+const { env: environment } = process;
+config({ path: pathResolve(__dirname, `/env/.env.${ environment.NODE_ENV || 'development' }`) });
 
 export default {
-  environment: env.NODE_ENV,
-  port: Number(env.PORT),
-  mongoConnectionString: env.MONGO_CONNECTION_STRING,
+  environment: environment.NODE_ENV,
+  port: Number(environment.PORT),
+  mongoConnectionString: environment.MONGO_CONNECTION_STRING,
   SQL: {
-    db: env.SQL_DB,
-    username: env.SQL_USERNAME,
-    password: env.SQL_PASSWORD,
-    host: env.SQL_HOST,
-    port: Number(env.SQL_PORT),
-    dialect: env.SQL_DIALECT
+    db: environment.SQL_DB,
+    username: environment.SQL_USERNAME,
+    password: environment.SQL_PASSWORD,
+    host: environment.SQL_HOST,
+    port: Number(environment.SQL_PORT),
+    dialect: environment.SQL_DIALECT
   },
   AWS: {
-    accessKeyId: env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
-    mainBucket: env.AWS_MAINBUCKET
+    accessKeyId: environment.AWS_ACCESS_KEY_ID,
+    secretAccessKey: environment.AWS_SECRET_ACCESS_KEY,
+    mainBucket: environment.AWS_MAINBUCKET
   },
   auth0: {
-    domain: env.AUTH0_DOMAIN,
-    clientId: env.AUTH0_CLIENT_ID,
-    clientSecret: env.AUTH0_CLIENT_SECRET,
-    audience: env.AUTH0_AUDIENCE
+    domain: environment.AUTH0_DOMAIN,
+    clientId: environment.AUTH0_CLIENT_ID,
+    clientSecret: environment.AUTH0_CLIENT_SECRET,
+    audience: environment.AUTH0_AUDIENCE
   },
   pubnub: {
-    publishKey: env.PUBNUB_PUBLISH_KEY,
-    subscribeKey: env.PUBNUB_SUBSCRIBE_KEY,
-    secretKey: env.PUBNUB_SECRET_KEY
+    publishKey: environment.PUBNUB_PUBLISH_KEY,
+    subscribeKey: environment.PUBNUB_SUBSCRIBE_KEY,
+    secretKey: environment.PUBNUB_SECRET_KEY
   },
   errorTypes: {
     db: { statusCode: 500, name: 'Internal Server Error', message: 'database error' },

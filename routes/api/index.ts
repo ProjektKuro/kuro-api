@@ -6,12 +6,14 @@ import {
 } from "express";
 import users from "./users";
 import profiles from "./profiles";
-import tags from "./tags";
+import products from "./products";
+import shops from "./shops";
 
 const router = Router();
-router.use('/', users);
+router.use('/users', users);
+router.use('/products', products);
 router.use('/profiles', profiles);
-router.use('/tags', tags);
+router.use('/shops', shops);
 
 router.use((err, req: Request, res: Response, next: NextFunction) => {
   if (err.name === 'ValidationError') {

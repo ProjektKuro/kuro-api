@@ -6,9 +6,10 @@
   "scripts": {
     "mongo:start": "docker run --name realworld-mongo -p 27017:27017 mongo & sleep 5",
     "start": "ts-node ./app.ts",
-    "dev": "nodemon ./app.ts",
+    "dev": "nodemon --config ./nodemon-config.json ./app.ts",
     "test": "newman run ./tests/api-tests.postman.json -e ./tests/env-api-tests.postman.json",
     "stop": "lsof -ti :3000 | xargs kill",
+    "server": "nodemon --watch server dist/app.js --exec babel-node",
     "mongo:stop": "docker stop realworld-mongo && docker rm realworld-mongo"
   },
   "repository": {
@@ -59,7 +60,9 @@
     "@types/request": "^2.48.4",
     "@types/slug": "^0.9.1",
     "@types/underscore": "^1.9.4",
+    "babel-node": "0.0.1-security",
     "newman": "^3.8.2",
+    "node-env-file": "^0.1.8",
     "nodemon": "^1.11.0",
     "ts-node": "^8.7.0",
     "typescript": "^3.8.3"
