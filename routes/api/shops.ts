@@ -39,7 +39,6 @@ shopRoutes.post('',
 );
 
 shopRoutes.get('/:shopId',
-  // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
       .populate({ path: 'products', model: Product })
@@ -55,7 +54,6 @@ shopRoutes.get('/:shopId',
 );
 
 shopRoutes.put('/:shopId',
-  // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
       .populate({ path: 'products', model: Product })
@@ -104,7 +102,6 @@ shopRoutes.delete('/:shopId',
   });
 
 shopRoutes.get('/:shopId/products',
-  // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
       .populate({ path: 'products', model: Product })

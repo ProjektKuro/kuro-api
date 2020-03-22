@@ -10,7 +10,7 @@ import products from "./products";
 import shops from "./shops";
 
 const router = Router();
-router.use('/', users);
+router.use('/users', users);
 router.use('/products', products);
 router.use('/profiles', profiles);
 router.use('/shops', shops);
