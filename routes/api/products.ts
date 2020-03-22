@@ -133,11 +133,14 @@ productRoutes.put('/:productId/shops/:shopId',
             if (typeof req.body.shop.name !== 'undefined') {
               shop.name = req.body.shop.name;
             }
-            if (typeof req.body.shop.latitude !== 'undefined') {
-              shop.latitude = req.body.shop.latitude;
-            }
-            if (typeof req.body.shop.longitude !== 'undefined') {
-              shop.longitude = req.body.shop.longitude;
+            if (
+              typeof req.body.shop.latitude !== 'undefined' &&
+              typeof req.body.shop.longitude !== 'undefined'
+            ) {
+              shop.location = {
+                type: "Point",
+                coordinates: [req.body.shop.latitude, req.body.shop.longitude]
+              }
             }
 
             return shop.save().then(function () {

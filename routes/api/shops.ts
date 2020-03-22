@@ -5,6 +5,7 @@ import {
   NextFunction
 } from 'express';
 import mongoose from "mongoose";
+import Address from '../../models/Address';
 import Shop from '../../models/Shop';
 import Product from '../../models/Product';
 
@@ -12,8 +13,22 @@ const shopRoutes = Router();
 
 shopRoutes.get('',
   (req: Request, res: Response, next: NextFunction) => {
-    Shop.find({})
-      .populate({ path: 'products', model: Product })
+    let find = {};
+    if (req.query.lat && req.query.long) {
+      find = {
+        location: {
+          $near: {
+            $maxDistance: +req.query.distance || 5000,
+            $geometry: { type: 'Point', coordinates: [+req.query.lat, +req.query.long] }
+          }
+        }
+      };
+    }
+    Shop.find(find)
+      .populate([
+        { path: 'products', model: Product },
+        { path: 'address', model: Address }
+      ])
       .then(shops => {
         if (!shops) { return res.sendStatus(404); }
 
@@ -27,8 +42,10 @@ shopRoutes.post('',
     const shop = new Shop();
 
     shop.name = req.body.shop.name;
-    shop.longitude = req.body.shop.longitude;
-    shop.latitude = req.body.shop.latitude;
+    shop.location = {
+      type: "Point",
+      coordinates: [req.body.shop.latitude, req.body.shop.longitude]
+    }
 
     shop.save().then(shop => {
       if (!shop) { return res.sendStatus(404); }
@@ -41,7 +58,10 @@ shopRoutes.post('',
 shopRoutes.get('/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
-      .populate({ path: 'products', model: Product })
+      .populate([
+        { path: 'products', model: Product },
+        { path: 'address', model: Address }
+      ])
       .then(shop => {
         if (!shop) {
           return res.sendStatus(404);
@@ -56,18 +76,24 @@ shopRoutes.get('/:shopId',
 shopRoutes.put('/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
-      .populate({ path: 'products', model: Product })
+      .populate([
+        { path: 'products', model: Product },
+        { path: 'address', model: Address }
+      ])
       .then(shop => {
         if (!shop) { return res.sendStatus(404); }
         // only update fields that were actually passed...
-        if (typeof req.body.product.name !== 'undefined') {
-          shop.name = req.body.product.name;
+        if (typeof req.body.shop.name !== 'undefined') {
+          shop.name = req.body.shop.name;
         }
-        if (typeof req.body.product.latitude !== 'undefined') {
-          shop.latitude = req.body.product.latitude;
-        }
-        if (typeof req.body.product.longitude !== 'undefined') {
-          shop.longitude = req.body.product.longitude;
+        if (
+          typeof req.body.shop.latitude !== 'undefined' &&
+          typeof req.body.shop.longitude !== 'undefined'
+        ) {
+          shop.location = {
+            type: "Point",
+            coordinates: [req.body.shop.latitude, req.body.shop.longitude]
+          }
         }
 
         return shop.save().then(function () {
@@ -104,7 +130,10 @@ shopRoutes.delete('/:shopId',
 shopRoutes.get('/:shopId/products',
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
-      .populate({ path: 'products', model: Product })
+      .populate([
+        { path: 'products', model: Product },
+        { path: 'address', model: Address }
+      ])
       .then(shop => {
         if (!shop) {
           return res.sendStatus(404);
@@ -139,7 +168,10 @@ shopRoutes.post('/:shopId/products/:productId',
 shopRoutes.put('/:shopId/products/:productId',
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
-      .populate({ path: 'products', model: Product })
+      .populate([
+        { path: 'products', model: Product },
+        { path: 'address', model: Address }
+      ])
       .then((shop) => {
         if (!shop) { return res.sendStatus(401); }
         // Find the store
@@ -168,7 +200,10 @@ shopRoutes.put('/:shopId/products/:productId',
 shopRoutes.delete('/:shopId/products/:productId',
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
-      .populate({ path: 'products', model: Product })
+      .populate([
+        { path: 'products', model: Product },
+        { path: 'address', model: Address }
+      ])
       .then((shop) => {
         if (!shop) { return res.sendStatus(404); }
         // Find the product
@@ -183,4 +218,22 @@ shopRoutes.delete('/:shopId/products/:productId',
           });
       }).catch(next);
   });
+
+/**
+* Adds an existing address by id to a shop by id
+*/
+shopRoutes.post('/:shopId/addresses/:addressId',
+  (req: Request, res: Response, next: NextFunction) => {
+    Address.findById(req.params.addressId)
+      .then((address) => {
+        if (!address) { return res.sendStatus(404); }
+        return Shop.findOneAndUpdate(
+          { _id: req.params.shopId },
+          { address: address }).then((shop) => {
+            if (!shop) { return res.sendStatus(404); }
+            return res.json({ address: shop.address });
+          });
+      }).catch(next);
+  });
+
 export default shopRoutes;
