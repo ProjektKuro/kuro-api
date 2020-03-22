@@ -41,7 +41,7 @@ var UserSchema = new Schema({
   },
   hash: String,
   salt: String
-}, { timestamps: true });
+}, { timestamps: true, usePushEach: true });
 
 UserSchema.plugin(mongooseUniqueValidator, { message: 'is already taken.' });
 

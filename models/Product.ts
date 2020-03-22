@@ -25,6 +25,6 @@ var ProductSchema = new Schema({
   description: String,
   shops: [{ type: Schema.Types.ObjectId, ref: 'Shop' }],
   categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
-}, { timestamps: true });
+}, { timestamps: true, usePushEach: true });
 
 export default model<IProduct, IProductModel>('Product', ProductSchema);

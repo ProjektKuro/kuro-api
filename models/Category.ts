@@ -20,6 +20,6 @@ interface ICategoryModel extends Model<ICategory> {
 var CategorySchema = new Schema({
   name: String,
   description: String,
-}, { timestamps: true });
+}, { timestamps: true, usePushEach: true });
 
 export default model<ICategory, ICategoryModel>('Category', CategorySchema);

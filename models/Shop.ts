@@ -9,6 +9,8 @@ interface IShop extends Document {
 interface IShopModel extends Model<IShop> {
 }
 
+export interface Shop extends IShop { }
+
 /**
  * Database definition for the `Shop` relation
  * 
@@ -26,6 +28,6 @@ var ShopSchema = new Schema({
   latitude: Number,
   longitude: Number,
   products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
-}, { timestamps: true });
+}, { timestamps: true, usePushEach: true });
 
 export default model<IShop, IShopModel>('Shop', ShopSchema);

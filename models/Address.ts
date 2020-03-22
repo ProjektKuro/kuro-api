@@ -27,6 +27,6 @@ var AddressSchema = new Schema({
   district: String,
   city: String,
   postralCode: Number,
-}, { timestamps: true });
+}, { timestamps: true, usePushEach: true });
 
 export default model<IAddress, IAddressModel>('Address', AddressSchema);

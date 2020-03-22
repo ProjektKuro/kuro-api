@@ -23,6 +23,6 @@ var ProfileSchema = new Schema({
   lastname: String,
   owner: { type: Schema.Types.ObjectId, ref: 'User' },
   lastLogin: Date,
-}, { timestamps: true });
+}, { timestamps: true, usePushEach: true });
 
 export default model<IProfile, IProfileModel>('Profile', ProfileSchema);
