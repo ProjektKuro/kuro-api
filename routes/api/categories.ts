@@ -134,7 +134,7 @@ categoryRoutes.put('/:categoryId/products/:productId',
       .populate({ path: 'products', model: Product })
       .then((category) => {
         if (!category) { return res.sendStatus(401); }
-        // Find the store
+        // Find the product
         return Product.findById(req.params.productId)
           .then((product) => {
             if (!product) { return res.sendStatus(404); }

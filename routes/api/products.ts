@@ -47,7 +47,10 @@ productRoutes.post('',
 productRoutes.get('/:productId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
-      .populate({ path: 'shops', model: Shop })
+      .populate([
+        { path: 'shops', model: Shop },
+        { path: 'categories', model: Category }
+      ])
       .then((product) => {
         if (!product) { return res.sendStatus(404); }
 
@@ -102,7 +105,10 @@ productRoutes.delete('/:productId',
 productRoutes.get('/:productId/shops',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
-      .populate({ path: 'shops', model: Shop })
+      .populate([
+        { path: 'shops', model: Shop },
+        { path: 'categories', model: Category }
+      ])
       .then((product) => {
         if (!product) { return res.sendStatus(404); }
 
@@ -149,7 +155,10 @@ productRoutes.post('/:productId/shops/:shopId',
         return Product.findOneAndUpdate(
           { _id: req.params.productId },
           { $push: { shops: shop } })
-          .populate({ path: 'shops', model: Shop })
+          .populate([
+            { path: 'shops', model: Shop },
+            { path: 'categories', model: Category }
+          ])
           .then((product) => {
             if (!product) { return res.sendStatus(404); }
             return res.json({ shops: product.shops });
@@ -160,7 +169,10 @@ productRoutes.post('/:productId/shops/:shopId',
 productRoutes.delete('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
-      .populate({ path: 'shops', model: Shop })
+      .populate([
+        { path: 'shops', model: Shop },
+        { path: 'categories', model: Category }
+      ])
       .then((product) => {
         if (!product) { return res.sendStatus(404); }
         // Find the store

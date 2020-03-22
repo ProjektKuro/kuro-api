@@ -21,6 +21,7 @@ interface ICategoryModel extends Model<ICategory> {
 var CategorySchema = new Schema({
   name: String,
   description: String,
+  products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
 }, { timestamps: true, usePushEach: true });
 
 export default model<ICategory, ICategoryModel>('Category', CategorySchema);
