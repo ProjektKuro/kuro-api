@@ -12,7 +12,7 @@ import { config } from 'dotenv';
 import constants from './config/constants';
 const setting = constants.environment
 const isProduction: boolean = constants.environment !== 'production';
-console.log(constants)
+
 // Create global app object
 const app: express.Application = express();
 

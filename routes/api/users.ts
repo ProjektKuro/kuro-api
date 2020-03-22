@@ -49,12 +49,6 @@ router.put(
       if (typeof req.body.user.email !== 'undefined') {
         user.email = req.body.user.email;
       }
-      if (typeof req.body.user.bio !== 'undefined') {
-        user.bio = req.body.user.bio;
-      }
-      if (typeof req.body.user.image !== 'undefined') {
-        user.image = req.body.user.image;
-      }
       // if (typeof req.body.user.password !== 'undefined') {
       //   user.setPassword(req.body.user.password);
       // }
