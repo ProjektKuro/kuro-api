@@ -183,5 +183,4 @@ shopRoutes.delete('/:shopId/products/:productId',
           });
       }).catch(next);
   });
-
 export default shopRoutes;
