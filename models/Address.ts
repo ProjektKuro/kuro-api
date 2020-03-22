@@ -1,8 +1,12 @@
 import { Schema, model, Model, Document } from 'mongoose';
 
 interface IAddress extends Document {
-  name: string;
-  description: string;
+  shop: any;
+  address: string;
+  address2: string;
+  district: string;
+  city: string;
+  postralCode: number;
 }
 interface IAddressModel extends Model<IAddress> {
 }
