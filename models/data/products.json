@@ -1,0 +1,98 @@
+[
+    {
+        "name": "Brot",
+        "description": "Gebackenes, frisches oder abgepacktes Brot",
+        "quantity": 100
+    },
+    {
+        "name": "Eier",
+        "description": "Von Hühnern",
+        "quantity": 100
+    },
+    {
+        "name": "Fertiggerichte",
+        "description": "Abgepacktes Essen. Schnell und einfach",
+        "quantity": 100
+    },
+    {
+        "name": "Gemüsekonserven",
+        "description": "Alles Grünzeug in Dosen",
+        "quantity": 100
+    },
+    {
+        "name": "Hefe",
+        "description": "Kleine Pilze, die den Teig aufpusten",
+        "quantity": 100
+    },
+    {
+        "name": "Kartoffeln",
+        "description": "Erdäpfel",
+        "quantity": 100
+    },
+    {
+        "name": "Mehl",
+        "description": "Backzutat",
+        "quantity": 100
+    },
+    {
+        "name": "Milch",
+        "description": "Von Kühen oder Ziegen",
+        "quantity": 100
+    },
+    {
+        "name": "Nudeln",
+        "description": "Wie aus Italien",
+        "quantity": 100
+    },
+    {
+        "name": "Öl",
+        "description": "Oliven, Raps, Sonnenblumen",
+        "quantity": 100
+    },
+    {
+        "name": "Reis",
+        "description": "Die von denen man 1000 Stück essen kann",
+        "quantity": 100
+    },
+    {
+        "name": "Säuglingsnahrung",
+        "description": "Für die Kleinsten von uns",
+        "quantity": 100
+    },
+    {
+        "name": "Tomatenkonserven",
+        "description": "Tomaten in Dose, was sonst",
+        "quantity": 100
+    },
+    {
+        "name": "Damenhygiene",
+        "description": "Für sie",
+        "quantity": 100
+    },
+    {
+        "name": "Desinfektionsmittel",
+        "description": "Booo, Keime und Bakterien",
+        "quantity": 100
+    },
+    {
+        "name": "Seife",
+        "description": "Wascht euch die Hände",
+        "quantity": 100
+    },
+    {
+        "name": "Klopapier",
+        "description": "Bitte nicht 10 Packungen auf einmal kaufen",
+        "quantity": 100,
+        "categories": {"name": "Haushaltswaren"}
+    },
+    {
+        "name": "Waschmittel",
+        "description": "Gegen Stinken",
+        "quantity": 100
+    },
+    {
+        "name": "Windeln",
+        "description": "Auch für die Kleinsten von uns, aber für nachher",
+        "quantity": 100
+    }
+]
