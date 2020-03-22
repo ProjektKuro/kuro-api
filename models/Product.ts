@@ -5,6 +5,7 @@ interface IProduct extends Document {
   description: string;
   quantity: number;
   shops: any[];
+  categories: any[];
 }
 interface IProductModel extends Model<IProduct> {
 }

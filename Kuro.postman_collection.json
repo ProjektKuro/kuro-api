@@ -332,7 +332,66 @@
 					"response": []
 				},
 				{
-					"name": "Get Shops that have Product by ID",
+					"name": "Update Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
+								"exec": [
+									"if(!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var product = responseJSON.product || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = product.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = product.hasOwnProperty('name');",
+									"    tests['Response has \"description\" property'] = product.hasOwnProperty('description');",
+									"    tests['Response has \"quantity\" property'] = product.hasOwnProperty('quantity');",
+									"    ",
+									"    tests['\"name\" property has been updated'] = product['name'] === 'Honig';",
+									"    tests['\"description\" property has been updated'] = product['description'] === 'Bienenkotze';",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"product\": {\n\t\t\"name\": \"Honig\",\n\t\t\"description\": \"Bienenkotze\",\n\t\t\"quantity\": 1\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/products/{{productId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Shops of Product by ID",
 					"event": [
 						{
 							"listen": "test",
@@ -432,110 +491,6 @@
 					"response": []
 				},
 				{
-					"name": "Delete Shop by ID from Product by ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
-								"exec": [
-									"if (!(environment.isIntegrationTest)) {",
-									"var is200Response = responseCode.code === 200;",
-									"",
-									"tests['Response code is 200 OK'] = is200Response;",
-									"",
-									"if(is200Response){",
-									"    var responseJSON = JSON.parse(responseBody);",
-									"    tests['Response has \"shops\" property'] = responseJSON.hasOwnProperty('shops');",
-									"    tests['Response has \"shops\" property is an Array'] = Array.isArray(responseJSON['shops']);",
-									"}",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}/shops/{{shopId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "1337",
-							"path": [
-								"api",
-								"products",
-								"{{productId}}",
-								"shops",
-								"{{shopId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Product by ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
-								"exec": [
-									"if(!(environment.isIntegrationTest)) {",
-									"var is200Response = responseCode.code === 200;",
-									"",
-									"tests['Response code is 200 OK'] = is200Response;",
-									"",
-									"if(is200Response){",
-									"    var responseJSON = JSON.parse(responseBody);",
-									"    var product = responseJSON.product || {};",
-									"",
-									"    tests['Response has \"_id\" property'] = product.hasOwnProperty('_id');",
-									"    tests['Response has \"name\" property'] = product.hasOwnProperty('name');",
-									"    tests['Response has \"description\" property'] = product.hasOwnProperty('description');",
-									"    tests['Response has \"quantity\" property'] = product.hasOwnProperty('quantity');",
-									"    ",
-									"    tests['\"name\" property has been updated'] = product['name'] === 'Honig';",
-									"    tests['\"description\" property has been updated'] = product['description'] === 'Bienenkotze';",
-									"}",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"product\": {\n\t\t\"name\": \"Honig\",\n\t\t\"description\": \"Bienenkotze\",\n\t\t\"quantity\": 1\n\t}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "1337",
-							"path": [
-								"api",
-								"products",
-								"{{productId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Update Shop by ID from Product by ID",
 					"event": [
 						{
@@ -591,6 +546,257 @@
 								"{{productId}}",
 								"shops",
 								"{{shopId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Shop by ID from Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"shops\" property'] = responseJSON.hasOwnProperty('shops');",
+									"    tests['Response has \"shops\" property is an Array'] = Array.isArray(responseJSON['shops']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1337/api/products/{{productId}}/shops/{{shopId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"products",
+								"{{productId}}",
+								"shops",
+								"{{shopId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories of Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"categories\" property'] = responseJSON.hasOwnProperty('categories');",
+									"    tests['Response has \"categories\" property is an Array'] = Array.isArray(responseJSON['categories']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/products/{{productId}}/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"products",
+								"{{productId}}",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Category by ID to Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"categories\" property'] = responseJSON.hasOwnProperty('categories');",
+									"    tests['Response has \"categories\" property is an Array'] = Array.isArray(responseJSON['categories']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/products/{{productId}}/categories/{{categoryId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"products",
+								"{{productId}}",
+								"categories",
+								"{{categoryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category by ID from Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
+								"exec": [
+									"if(!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var product = responseJSON.product || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = product.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = product.hasOwnProperty('name');",
+									"    tests['Response has \"description\" property'] = product.hasOwnProperty('description');",
+									"    tests['Response has \"createdAt\" property'] = product.hasOwnProperty('createdAt');",
+									"    tests['Response\\'s \"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(product.createdAt);",
+									"    tests['Response has \"updatedAt\" property'] = product.hasOwnProperty('updatedAt');",
+									"    tests['Response\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(product.updatedAt);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"shop\": {\n\t\t\"name\": \"Liddl\",\n\t\t\"latitude\": \"1.2345\",\n\t\t\"longitude\": \"9.8765\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/products/{{productId}}/categories/{{categoryId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"products",
+								"{{productId}}",
+								"categories",
+								"{{categoryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category by ID from Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"shops\" property'] = responseJSON.hasOwnProperty('shops');",
+									"    tests['Response has \"shops\" property is an Array'] = Array.isArray(responseJSON['shops']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1337/api/products/{{productId}}/categories/{{categoryId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"products",
+								"{{productId}}",
+								"categories",
+								"{{categoryId}}"
 							]
 						}
 					},
