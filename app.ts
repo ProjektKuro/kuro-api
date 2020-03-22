@@ -12,7 +12,6 @@ import { config } from 'dotenv';
 import constants from './config/constants';
 const setting = constants.environment
 const isProduction: boolean = constants.environment !== 'production';
-console.log(constants)
 // Create global app object
 const app: express.Application = express();
 
@@ -42,13 +41,13 @@ if (!isProduction) {
 if (isProduction) {
   mongoose.connect(constants.mongoConnectionString);
 } else {
-  mongoose.connect('mongodb://localhost/conduit');
+  mongoose.connect('mongodb://localhost/kuro');
   mongoose.set('debug', true);
 }
 
 require('./models/User');
-require('./models/Article');
-require('./models/Comment');
+// require('./models/Article');
+// require('./models/Comment');
 require('./config/passport');
 
 app.use(require('./routes'));

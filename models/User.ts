@@ -1,9 +1,27 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document, Model } from 'mongoose';
 import mongooseUniqueValidator from 'mongoose-unique-validator';
 import { pbkdf2Sync, randomBytes } from 'crypto';
 import { sign } from 'jsonwebtoken';
 var secret = require('../config').secret;
 
+interface IUser extends Document {
+  username: string,
+  email: string,
+}
+interface IUserModel extends Model<IUser> {
+}
+
+/**
+ * Database definition for the `User` relation
+ * 
+ * @number  id          the unique identifying number of the user
+ * @string  email       the email address of the user
+ * @string  username    the username of the user
+ * @string  password    (salted) password of the user
+ * @string  createdAt   timestamp of the creation
+ * @string  updatedAt   timestamp of the last update
+ * 
+ */
 var UserSchema = new Schema({
   username: {
     type: String,
@@ -21,13 +39,9 @@ var UserSchema = new Schema({
     match: [/\S+@\S+\.\S+/, 'is invalid'],
     index: true
   },
-  bio: String,
-  image: String,
-  favorites: [{ type: Schema.Types.ObjectId, ref: 'Article' }],
-  following: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   hash: String,
   salt: String
-}, { timestamps: true });
+}, { timestamps: true, usePushEach: true });
 
 UserSchema.plugin(mongooseUniqueValidator, { message: 'is already taken.' });
 
@@ -110,4 +124,4 @@ UserSchema.methods.isFollowing = function (id) {
   });
 };
 
-model('User', UserSchema);
+export default model<IUser, IUserModel>('User', UserSchema);
