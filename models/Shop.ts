@@ -22,7 +22,7 @@ interface IShopModel extends Model<IShop> {
  * 
  */
 var ShopSchema = new Schema({
-  name: String,
+  name: { type: String, text: true },
   location: {
     type: {
       type: String, // Don't do `{ location: { type: String } }`
@@ -38,6 +38,6 @@ var ShopSchema = new Schema({
   address: { type: Schema.Types.ObjectId, ref: 'Address' },
 }, { timestamps: true, usePushEach: true });
 
-ShopSchema.index({ name: 'text', location: "2dsphere" });
+ShopSchema.index({ location: "2dsphere" });
 
 export default model<IShop, IShopModel>('Shop', ShopSchema);

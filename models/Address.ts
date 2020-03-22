@@ -26,13 +26,12 @@ interface IAddressModel extends Model<IAddress> {
  */
 var AddressSchema = new Schema({
   shop: { type: Schema.Types.ObjectId, ref: 'Shop' },
-  address: String,
-  address2: String,
-  district: String,
-  city: String,
-  postalCode: Number,
+  address: { type: String, text: true },
+  address2: { type: String, text: true },
+  district: { type: String, text: true },
+  city: { type: String, text: true },
+  postalCode: { type: Number, text: true },
 }, { timestamps: true, usePushEach: true });
 
-AddressSchema.index({ address: 'text', address2: "text", district: 'text', city: "text" });
 
 export default model<IAddress, IAddressModel>('Address', AddressSchema);

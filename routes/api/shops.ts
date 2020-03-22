@@ -28,9 +28,9 @@ shopRoutes.get('',
         },
       };
     }
-    if (!!req.query.q) {
-      find['$text'] = { "$search": req.query.q }
-    }
+    // if (!!req.query.q) {
+    //   find['$text'] = { "$search": req.query.q }
+    // }
     Shop.find(find)
       .populate([
         { path: 'products', model: Product },

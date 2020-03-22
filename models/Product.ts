@@ -23,13 +23,11 @@ interface IProductModel extends Model<IProduct> {
  * 
  */
 var ProductSchema = new Schema({
-  name: String,
-  description: String,
+  name: { type: String, text: true },
+  description: { type: String, text: true },
   quantity: Number,
   shops: [{ type: Schema.Types.ObjectId, ref: 'Shop' }],
   categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
 }, { timestamps: true, usePushEach: true });
-
-ProductSchema.index({ name: 'text', description: "text" });
 
 export default model<IProduct, IProductModel>('Product', ProductSchema);
