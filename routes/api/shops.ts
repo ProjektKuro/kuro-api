@@ -137,19 +137,34 @@ shopRoutes.post('/:shopId/products/:productId',
   });
 
 /**
- * Updats a product by id in a shop by id
+ * Updates a product by id in a shop by id
  */
 shopRoutes.put('/:shopId/products/:productId',
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
-      .then(shop => {
-        if (!shop) { return res.sendStatus(404); }
-        const bodyShop = req.body.shop;
-        return bodyShop.save().then(() => {
-          return res.json({ shop: shop });
-        });
-      })
-      .catch(next);
+      .populate({ path: 'products', model: Product })
+      .then((shop) => {
+        if (!shop) { return res.sendStatus(401); }
+        // Find the store
+        return Product.findById(req.params.productId)
+          .then((product) => {
+            if (!product) { return res.sendStatus(404); }
+            // only update fields that were actually passed...
+            if (typeof req.body.product.name !== 'undefined') {
+              product.name = req.body.product.name;
+            }
+            if (typeof req.body.product.description !== 'undefined') {
+              product.description = req.body.product.description;
+            }
+            if (typeof req.body.product.quantity !== 'undefined') {
+              product.quantity = req.body.product.quantity;
+            }
+
+            return product.save().then(function () {
+              return res.json({ product });
+            });
+          });
+      }).catch(next);
   }
 );
 

@@ -108,32 +108,30 @@ productRoutes.get('/:productId/shops',
 
 productRoutes.put('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.params.id)
-    Product.findById(req.params.id).then((product) => {
-      if (!product) {
-        return res.sendStatus(401);
-      }
-      // only update fields that were actually passed...
-      // if (typeof req.body.product.productname !== 'undefined') {
-      //   product.productname = req.body.product.productname;
-      // }
-      // if (typeof req.body.product.email !== 'undefined') {
-      //   product.email = req.body.product.email;
-      // }
-      // if (typeof req.body.product.bio !== 'undefined') {
-      //   product.bio = req.body.product.bio;
-      // }
-      // if (typeof req.body.product.image !== 'undefined') {
-      //   product.image = req.body.product.image;
-      // }
-      // if (typeof req.body.product.password !== 'undefined') {
-      //   product.setPassword(req.body.product.password);
-      // }
+    Product.findById(req.params.productId)
+      .populate({ path: 'shops', model: Shop })
+      .then((product) => {
+        if (!product) { return res.sendStatus(401); }
+        // Find the store
+        return Shop.findById(req.params.shopId)
+          .then((shop) => {
+            if (!shop) { return res.sendStatus(404); }
+            // only update fields that were actually passed...
+            if (typeof req.body.shop.name !== 'undefined') {
+              shop.name = req.body.shop.name;
+            }
+            if (typeof req.body.shop.latitude !== 'undefined') {
+              shop.latitude = req.body.shop.latitude;
+            }
+            if (typeof req.body.shop.longitude !== 'undefined') {
+              shop.longitude = req.body.shop.longitude;
+            }
 
-      return product.save().then(function () {
-        return res.json({ product: product });
-      });
-    }).catch(next);
+            return shop.save().then(function () {
+              return res.json({ product });
+            });
+          });
+      }).catch(next);
   });
 
 productRoutes.post('/:productId/shops/:shopId',
