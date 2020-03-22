@@ -3,6 +3,7 @@ import { Schema, model, Model, Document } from 'mongoose';
 interface IProduct extends Document {
   name: string;
   description: string;
+  shops: any[];
 }
 interface IProductModel extends Model<IProduct> {
 }
