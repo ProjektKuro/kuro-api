@@ -91,7 +91,8 @@ productsRoutes.delete('/:productId',
 
 productsRoutes.get('/:productId/shops',
   (req: Request, res: Response, next: NextFunction) => {
-    Product.findById(req.params.productId).populate({ path: 'shops', model: Shop })
+    Product.findById(req.params.productId)
+      .populate({ path: 'shops', model: Shop })
       .then((product) => {
         if (!product) { return res.sendStatus(404); }
 
@@ -99,38 +100,7 @@ productsRoutes.get('/:productId/shops',
       }).catch(next);
   });
 
-productsRoutes.post('/:pid/shops',
-  (req: Request, res: Response, next: NextFunction) => {
-    Product.findById(req.params.id).populate('shops').then((product) => {
-      if (!product) { return res.sendStatus(404); }
-
-      return res.json({ product });
-    }).catch(next);
-  });
-
-productsRoutes.get('/:pid/shops/:sid',
-  (req: Request, res: Response, next: NextFunction) => {
-    Product.findById(req.params.id).then((product) => {
-      if (!product) { return res.sendStatus(404); }
-
-      return res.json({ product });
-    }).catch(next);
-  });
-
-productsRoutes.put('/:pid/shops/:sid',
-  (req: Request, res: Response, next: NextFunction) => {
-    Product.findById(req.params.id).then((product) => {
-      if (!product) {
-        return res.sendStatus(401);
-      }
-
-      return product.save().then(function () {
-        return res.json({ product: product });
-      });
-    }).catch(next);
-  });
-
-productsRoutes.post('/:pid/shops/:sid',
+productsRoutes.put('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
     console.log(req.params.id)
     Product.findById(req.params.id).then((product) => {
@@ -160,34 +130,50 @@ productsRoutes.post('/:pid/shops/:sid',
     }).catch(next);
   });
 
-productsRoutes.delete('/:pid/shops/:sid',
+productsRoutes.post('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.params.id)
-    Product.findById(req.params.id).then((product) => {
-      if (!product) {
-        return res.sendStatus(401);
-      }
-      // only update fields that were actually passed...
-      // if (typeof req.body.product.productname !== 'undefined') {
-      //   product.productname = req.body.product.productname;
-      // }
-      // if (typeof req.body.product.email !== 'undefined') {
-      //   product.email = req.body.product.email;
-      // }
-      // if (typeof req.body.product.bio !== 'undefined') {
-      //   product.bio = req.body.product.bio;
-      // }
-      // if (typeof req.body.product.image !== 'undefined') {
-      //   product.image = req.body.product.image;
-      // }
-      // if (typeof req.body.product.password !== 'undefined') {
-      //   product.setPassword(req.body.product.password);
-      // }
+    Product.findById(req.params.productId)
+      .populate({ path: 'shops', model: Shop })
+      .then((product) => {
+        if (!product) { return res.sendStatus(404); }
+        // Find the store
+        return Shop.findById(req.params.shopId)
+          .then((shop) => {
+            if (!shop) { return res.sendStatus(404); }
+            product.shops.push(shop);
 
-      return product.save().then(function () {
-        return res.json({ product: product });
-      });
-    }).catch(next);
+            // product.save().then(() => { console.log('saved'); return 1; });
+            // return res.json({ shops: product.shops });
+
+            // TODO: Error: "message": "Unknown modifier: $pushAll",
+            return product.save().then(() => {
+              return res.json({ shops: product.shops });
+            });
+          });
+      }).catch(next);
+  });
+
+productsRoutes.delete('/:productId/shops/:shopId',
+  (req: Request, res: Response, next: NextFunction) => {
+    Product.findById(req.params.productId)
+      .populate({ path: 'shops', model: Shop })
+      .then((product) => {
+        if (!product) { return res.sendStatus(404); }
+        // Find the store
+        return Shop.findById(req.params.shopId)
+          .then((shop) => {
+            if (!shop) { return res.sendStatus(404); }
+            return product.update({
+              shops: shop._id
+            }, {
+              '$pull': {
+                shops: shop._id
+              }
+            }).then(() => {
+              return res.json({ shops: product.shops });
+            });
+          });
+      }).catch(next);
   });
 
 export default productsRoutes;
