@@ -30,4 +30,6 @@ var ProductSchema = new Schema({
   categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
 }, { timestamps: true, usePushEach: true });
 
+ProductSchema.index({ name: 'text', description: "text" });
+
 export default model<IProduct, IProductModel>('Product', ProductSchema);

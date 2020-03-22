@@ -33,4 +33,6 @@ var AddressSchema = new Schema({
   postalCode: Number,
 }, { timestamps: true, usePushEach: true });
 
+AddressSchema.index({ address: 'text', address2: "text", district: 'text', city: "text" });
+
 export default model<IAddress, IAddressModel>('Address', AddressSchema);

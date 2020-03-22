@@ -38,6 +38,6 @@ var ShopSchema = new Schema({
   address: { type: Schema.Types.ObjectId, ref: 'Address' },
 }, { timestamps: true, usePushEach: true });
 
-ShopSchema.index({ location: "2dsphere" });
+ShopSchema.index({ name: 'text', location: "2dsphere" });
 
 export default model<IShop, IShopModel>('Shop', ShopSchema);

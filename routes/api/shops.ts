@@ -27,8 +27,9 @@ shopRoutes.get('',
           },
         },
       };
-    } if(!!req.query.q){
-      find['name'] = req.query.q;
+    }
+    if (!!req.query.q) {
+      find['$text'] = { "$search": req.query.q }
     }
     Shop.find(find)
       .populate([
@@ -37,7 +38,7 @@ shopRoutes.get('',
       ])
       .then(shops => {
         if (!shops) { return res.sendStatus(404); }
-        console.log(shops[0].products)
+
         return res.json({ shops });
       }).catch(next);
   }
@@ -56,8 +57,7 @@ shopRoutes.post('',
     shop.save().then(shop => {
       if (!shop) { return res.sendStatus(404); }
       return res.json({ shop });
-    })
-      .catch(next);
+    }).catch(next);
   }
 );
 
