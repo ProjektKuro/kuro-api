@@ -315,10 +315,6 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "http://localhost:1337/api/products/{{productId}}/shops/{{shopId}}",
 							"protocol": "http",
@@ -391,6 +387,67 @@
 								"api",
 								"products",
 								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Shop by ID from Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
+								"exec": [
+									"if(!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var product = responseJSON.product || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = product.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = product.hasOwnProperty('name');",
+									"    tests['Response has \"description\" property'] = product.hasOwnProperty('description');",
+									"    tests['Response has \"quantity\" property'] = product.hasOwnProperty('quantity');",
+									"    ",
+									"    tests['\"name\" property has been updated'] = product['name'] === 'Honig';",
+									"    tests['\"description\" property has been updated'] = product['description'] === 'Bienenkotze';",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"shop\": {\n\t\t\"name\": \"Liddl\",\n\t\t\"latitude\": \"1.2345\",\n\t\t\"longitude\": \"9.8765\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/products/{{productId}}/shops/{{shopId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"products",
+								"{{productId}}",
+								"shops",
+								"{{shopId}}"
 							]
 						}
 					},
@@ -757,10 +814,6 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "http://localhost:1337/api/shops/{{shopId}}/products/{{productId}}",
 							"protocol": "http",
@@ -824,7 +877,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"product\": {\n\t\t\"name\": \"Ed & Eka\",\n\t\t\"latitude\": \"56.8237\",\n\t\t\"longitude\": \"44.9211\"\n\t}\n}",
+							"raw": "{\n\t\"shop\": {\n\t\t\"name\": \"Ed & Eka\",\n\t\t\"latitude\": \"56.8237\",\n\t\t\"longitude\": \"44.9211\"\n\t}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -842,6 +895,67 @@
 								"api",
 								"shops",
 								"{{shopId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product by ID from Shop by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
+								"exec": [
+									"if(!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var product = responseJSON.product || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = product.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = product.hasOwnProperty('name');",
+									"    tests['Response has \"description\" property'] = product.hasOwnProperty('description');",
+									"    tests['Response has \"quantity\" property'] = product.hasOwnProperty('quantity');",
+									"    ",
+									"    tests['\"name\" property has been updated'] = product['name'] === 'Honig';",
+									"    tests['\"description\" property has been updated'] = product['description'] === 'Bienenkotze';",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"product\": {\n\t\t\"name\": \"Honig\",\n\t\t\"description\": \"Bienenkotze\",\n\t\t\"quantity\": 1\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/shops/{{shopId}}/products/{{productId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"shops",
+								"{{shopId}}",
+								"products",
+								"{{productId}}"
 							]
 						}
 					},
