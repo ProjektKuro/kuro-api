@@ -38,10 +38,14 @@ if (!isProduction) {
   app.use(errorHandler());
 }
 
+const mongoOptions = {
+  useNewUrlParser: true
+};
+
 if (isProduction) {
-  mongoose.connect(constants.mongoConnectionString);
+  mongoose.connect(constants.mongoConnectionString, mongoOptions);
 } else {
-  mongoose.connect('mongodb://localhost/kuro');
+  mongoose.connect('mongodb://localhost/kuro', mongoOptions);
   mongoose.set('debug', true);
 }
 
