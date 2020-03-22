@@ -59,6 +59,21 @@ shopRoutes.get(
       .catch(next);
   }
 );
+shopRoutes.put(
+  "/:shopId",
+  // auth.required,
+  (req: Request, res: Response, next: NextFunction) => {
+    Shop.findById(req.params.shopId)
+      .then(shop => {
+        if (!shop) {
+          return res.sendStatus(404);
+        }
+        shop = req.body.shop;
+        return res.json({ shop: shop });
+      })
+      .catch(next);
+  }
+);
 shopRoutes.get(
   "/:shopId/products",
   // auth.required,
@@ -75,23 +90,6 @@ shopRoutes.get(
       .catch(next);
   }
 );
-shopRoutes.get(
-  "/:shopId/products/:productId",
-  // auth.required,
-  (req, res, next) => {
-    Shop.findById(req.params.shopId)
-      .populate({ path: "products", model: Product })
-      .then(shop => {
-        if (!shop) {
-          return res.sendStatus(404);
-        }
-        const productId = req.params.productId;
-        const product = shop.products.filter(product => product._id === productId);
-        return res.json({ products: product });
-      })
-      .catch(next);
-  }
-);
 shopRoutes.post(
   "/:shopId/products/:productId",
   // auth.required,
@@ -102,7 +100,7 @@ shopRoutes.post(
           return res.sendStatus(404);
         }
         if (!shop.products) {
-          return res.sendStatus(500);
+          return res.json({ shop: [] });
         }
         const product = new Product();
         product.name = req.body.productId;
@@ -114,27 +112,27 @@ shopRoutes.post(
         return res.sendStatus(500);
       })
       .catch(next);
-      return res.sendStatus(500);
+      return res.sendStatus(504);
     }
 );
 
-// shopRoutes.put(
-//   "/:shopId/products/:productId",
-//   // auth.required,
-//   (req, res, next) => {
-//     console.log(req.params.id);
-//     Shop.findById(req.params.id)
-//       .then(user => {
-//         if (!user) {
-//           return res.sendStatus(401);
-//         }
-
-//         return user.save().then(function() {
-//           return res.json({ user: user });
-//         });
-//       })
-//       .catch(next);
-//   }
-// );
+shopRoutes.put(
+  "/:shopId/products/:productId",
+  // auth.required,
+  (req, res, next) => {
+    Shop.findById(req.params.id)
+      .then(shop => {
+        if (!shop) {
+          return res.sendStatus(404);
+        }
+        const bodyShop = req.body.shop;
+        return bodyShop.save().then(function() {
+          
+          return res.json({ shop: shop });
+        });
+      })
+      .catch(next);
+  }
+);
 
 export default shopRoutes;
