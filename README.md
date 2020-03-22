@@ -33,6 +33,9 @@ Um den Code zu benutzen bedarf es folgender Schritte:
 
 // TODO
 
+### API
+[Postman API Documentation](https://documenter.getpostman.com/view/4294690/SzS8rjyg?version=latest)
+
 ## Beteiligte
 
 Hier werden alle (maßgeblich) an der Entwicklung des Backends beteiligten Leute aufgelistet.
