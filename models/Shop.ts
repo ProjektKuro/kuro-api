@@ -4,6 +4,7 @@ interface IShop extends Document {
   name: string;
   latitude: number;
   longitude: number;
+  products: any;
 }
 interface IShopModel extends Model<IShop> {
 }

@@ -7,13 +7,13 @@ import {
 import users from "./users";
 import profiles from "./profiles";
 import products from "./products";
-// import shops from "./shops";
+import shops from "./shops";
 
 const router = Router();
 router.use('/', users);
 router.use('/products', products);
 router.use('/profiles', profiles);
-// router.use('/shops', shops);
+router.use('/shops', shops);
 
 router.use((err, req: Request, res: Response, next: NextFunction) => {
   if (err.name === 'ValidationError') {

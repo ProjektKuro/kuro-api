@@ -4,11 +4,12 @@ import passport from "passport";
 import { model } from "mongoose";
 import { auth } from "../auth";
 import Shop from "../../models/Shop";
+import Product from "../../models/Product";
 
 const shopRoutes = Router();
 
 shopRoutes.get(
-  "/shops",
+  "",
   // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
     Shop.find({})
@@ -23,12 +24,33 @@ shopRoutes.get(
   }
 );
 shopRoutes.post(
-  "/shops",
+  "",
   // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
-    Shop.find({})
-      .then(shops => {
-        if (!shops) {
+    const shop = new Shop();
+
+    shop.name = req.body.shop.name;
+    shop.longitude = req.body.shop.longitude;
+    shop.latitude = req.body.shop.latitude;
+
+    shop
+      .save()
+      .then(shop => {
+        if (!shop) {
+          return res.sendStatus(404);
+        }
+        return res.json({ shop });
+      })
+      .catch(next);
+  }
+);
+shopRoutes.get(
+  "/:shopId",
+  // auth.required,
+  (req: Request, res: Response, next: NextFunction) => {
+    Shop.findById(req.params.id)
+      .then(shop => {
+        if (!shop) {
           return res.sendStatus(404);
         }
 
@@ -38,88 +60,70 @@ shopRoutes.post(
   }
 );
 shopRoutes.get(
-  "/shops/:shopId",
+  "/:shopId/products",
   // auth.required,
-  (req: Request, res: Response, next: NextFunction) => {
+  (req, res, next) => {
     Shop.findById(req.params.id)
-      .then(user => {
-        if (!user) {
+      .populate({ path: "products", model: Product })
+      .then(shop => {
+        if (!shop) {
           return res.sendStatus(404);
         }
 
-        return res.json({ user: user });
+        return res.json({ products: shop.products });
       })
       .catch(next);
   }
 );
-shopRoutes.get(
-  "/shops/:shopId/products",
-  // auth.required,
-  (req, res, next) => {
-    console.log(req.params.id);
-    Shop.findById(req.params.id)
-      .then(user => {
-        if (!user) {
-          return res.sendStatus(401);
-        }
+// shopRoutes.get(
+//   "/:shopId/products/:productId",
+//   // auth.required,
+//   (req, res, next) => {
+//     console.log(req.params.id);
+//     Shop.findById(req.params.id)
+//       .then(user => {
+//         if (!user) {
+//           return res.sendStatus(401);
+//         }
+//         return user.save().then(function() {
+//           return res.json({ user: user });
+//         });
+//       })
+//       .catch(next);
+//   }
+// );
+// shopRoutes.post(
+//   "/:shopId/products/:productId",
+//   // auth.required,
+//   (req, res, next) => {
+//     console.log(req.params.id);
+//     Shop.findById(req.params.id)
+//       .then(user => {
+//         if (!user) {
+//           return res.sendStatus(401);
+//         }
+//       })
+//       .catch(next);
+//   }
+// );
 
-        return user.save().then(function() {
-          return res.json({ user: user });
-        });
-      })
-      .catch(next);
-  }
-);
-shopRoutes.get(
-  "/shops/:shopId/products/:productId",
-  // auth.required,
-  (req, res, next) => {
-    console.log(req.params.id);
-    Shop.findById(req.params.id)
-      .then(user => {
-        if (!user) {
-          return res.sendStatus(401);
-        }
-          return user.save().then(function() {
-          return res.json({ user: user });
-        });
-      })
-      .catch(next);
-  }
-);
-shopRoutes.post(
-  "/shops/:shopId/products/:productId",
-  // auth.required,
-  (req, res, next) => {
-    console.log(req.params.id);
-    Shop.findById(req.params.id)
-      .then(user => {
-        if (!user) {
-          return res.sendStatus(401);
-        }
-       
-      })
-      .catch(next);
-  }
-);
+// shopRoutes.put(
+//   "/:shopId/products/:productId",
+//   // auth.required,
+//   (req, res, next) => {
+//     console.log(req.params.id);
+//     Shop.findById(req.params.id)
+//       .then(user => {
+//         if (!user) {
+//           return res.sendStatus(401);
+//         }
 
-shopRoutes.put(
-  "/shops/:shopId/products/:productId",
-  // auth.required,
-  (req, res, next) => {
-    console.log(req.params.id);
-    Shop.findById(req.params.id)
-      .then(user => {
-        if (!user) {
-          return res.sendStatus(401);
-        }
-       
-        return user.save().then(function() {
-          return res.json({ user: user });
-        });
-      })
-      .catch(next);
-  }
-);
+//         return user.save().then(function() {
+//           return res.json({ user: user });
+//         });
+//       })
+//       .catch(next);
+//   }
+// );
 
 export default shopRoutes;
