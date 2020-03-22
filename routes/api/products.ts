@@ -132,23 +132,16 @@ productsRoutes.put('/:productId/shops/:shopId',
 
 productsRoutes.post('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
-    Product.findById(req.params.productId)
-      .populate({ path: 'shops', model: Shop })
-      .then((product) => {
-        if (!product) { return res.sendStatus(404); }
-        // Find the store
-        return Shop.findById(req.params.shopId)
-          .then((shop) => {
-            if (!shop) { return res.sendStatus(404); }
-            product.shops.push(shop);
-
-            // product.save().then(() => { console.log('saved'); return 1; });
-            // return res.json({ shops: product.shops });
-
-            // TODO: Error: "message": "Unknown modifier: $pushAll",
-            return product.save().then(() => {
-              return res.json({ shops: product.shops });
-            });
+    Shop.findById(req.params.shopId)
+      .then((shop) => {
+        if (!shop) { return res.sendStatus(404); }
+        return Product.findOneAndUpdate(
+          { _id: req.params.productId },
+          { $push: { shops: shop } })
+          .populate({ path: 'shops', model: Shop })
+          .then((product) => {
+            if (!product) { return res.sendStatus(404); }
+            return res.json({ shops: product.shops });
           });
       }).catch(next);
   });
@@ -163,12 +156,8 @@ productsRoutes.delete('/:productId/shops/:shopId',
         return Shop.findById(req.params.shopId)
           .then((shop) => {
             if (!shop) { return res.sendStatus(404); }
-            return product.update({
-              shops: shop._id
-            }, {
-              '$pull': {
-                shops: shop._id
-              }
+            return product.update({ shops: shop._id }, {
+              '$pull': { shops: shop._id }
             }).then(() => {
               return res.json({ shops: product.shops });
             });
