@@ -1,7 +1,24 @@
 {
-  "name": "conduit-node",
-  "version": "1.0.0",
-  "description": "conduit on node",
+  "name": "kuro-api",
+  "version": "0.9.0-beta",
+  "description": "REST Api for Kuro",
+  "contributors": [
+    {
+      "name": "Tobias Lahmann",
+      "email": "tobiaslahmann@gmail.com",
+      "url": "https://github.com/tlahmann"
+    },
+    {
+      "name": "Sven Patrick Meier",
+      "email": "sven.patrick.meier@gmail.com",
+      "url": "https://github.com/svenpatrickmeier"
+    },
+    {
+      "name": "Timo Netzer",
+      "email": "exodiquas@gmail.com",
+      "url": "https://github.com/exodiquas/"
+    }
+  ],
   "main": "app.js",
   "scripts": {
     "mongo:start": "docker run --name realworld-mongo -p 27017:27017 mongo & sleep 5",
@@ -16,7 +33,7 @@
     "type": "git",
     "url": "git+https://github.com/gothinkster/productionready-node-api.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "1.15.0",
     "cors": "2.7.1",
