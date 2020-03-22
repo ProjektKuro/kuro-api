@@ -4,30 +4,33 @@ import {
   Router,
   NextFunction
 } from "express";
+import mongoose from "mongoose";
 import Product from "../../models/Product";
 import Shop from "../../models/Shop";
-import mongoose from "mongoose";
 
-const productsRoutes = Router();
+const productRoutes = Router();
 
 /**
 * Get route for all Products
 */
-productsRoutes.get('',
+productRoutes.get('',
   (req: Request, res: Response, next: NextFunction) => {
-    Product.find({}).then((products) => {
-      if (!products) { return res.sendStatus(404); }
+    Product.find({})
+      .populate({ path: 'shops', model: Shop })
+      .then((products) => {
+        if (!products) { return res.sendStatus(404); }
 
-      return res.json({ products });
-    }).catch(next);
+        return res.json({ products });
+      }).catch(next);
   });
 
-productsRoutes.post('',
+productRoutes.post('',
   (req: Request, res: Response, next: NextFunction) => {
     const product = new Product();
 
     product.name = req.body.product.name;
     product.description = req.body.product.description;
+    product.quantity = req.body.product.quantity;
 
     product.save().then(function () {
       return res.json({ product }); // .toAuthJSON() });
@@ -37,27 +40,30 @@ productsRoutes.post('',
 /**
  * Get route for the Product with id {id}
  */
-productsRoutes.get('/:productId',
+productRoutes.get('/:productId',
   (req: Request, res: Response, next: NextFunction) => {
-    Product.findById(req.params.productId).then((product) => {
-      if (!product) { return res.sendStatus(404); }
+    Product.findById(req.params.productId)
+      .populate({ path: 'shops', model: Shop })
+      .then((product) => {
+        if (!product) { return res.sendStatus(404); }
 
-      return res.json({ product });
-    }).catch(next);
+        return res.json({ product });
+      }).catch(next);
   });
 
-productsRoutes.put('/:productId',
+productRoutes.put('/:productId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId).then((product) => {
-      if (!product) {
-        return res.sendStatus(401);
-      }
+      if (!product) { return res.sendStatus(401); }
       // only update fields that were actually passed...
       if (typeof req.body.product.name !== 'undefined') {
         product.name = req.body.product.name;
       }
       if (typeof req.body.product.description !== 'undefined') {
         product.description = req.body.product.description;
+      }
+      if (typeof req.body.product.quantity !== 'undefined') {
+        product.quantity = req.body.product.quantity;
       }
 
       return product.save().then(function () {
@@ -66,7 +72,7 @@ productsRoutes.put('/:productId',
     }).catch(next);
   });
 
-productsRoutes.post('/:productId',
+productRoutes.post('/:productId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId).then((product) => {
       if (!product) { return res.sendStatus(404); }
@@ -79,7 +85,7 @@ productsRoutes.post('/:productId',
     }).catch(next);
   });
 
-productsRoutes.delete('/:productId',
+productRoutes.delete('/:productId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId).then((product) => {
       if (!product) { return res.sendStatus(404); }
@@ -89,7 +95,7 @@ productsRoutes.delete('/:productId',
     }).catch(next);
   });
 
-productsRoutes.get('/:productId/shops',
+productRoutes.get('/:productId/shops',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
       .populate({ path: 'shops', model: Shop })
@@ -100,7 +106,7 @@ productsRoutes.get('/:productId/shops',
       }).catch(next);
   });
 
-productsRoutes.put('/:productId/shops/:shopId',
+productRoutes.put('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
     console.log(req.params.id)
     Product.findById(req.params.id).then((product) => {
@@ -130,7 +136,7 @@ productsRoutes.put('/:productId/shops/:shopId',
     }).catch(next);
   });
 
-productsRoutes.post('/:productId/shops/:shopId',
+productRoutes.post('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
       .then((shop) => {
@@ -146,7 +152,7 @@ productsRoutes.post('/:productId/shops/:shopId',
       }).catch(next);
   });
 
-productsRoutes.delete('/:productId/shops/:shopId',
+productRoutes.delete('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
       .populate({ path: 'shops', model: Shop })
@@ -165,4 +171,4 @@ productsRoutes.delete('/:productId/shops/:shopId',
       }).catch(next);
   });
 
-export default productsRoutes;
+export default productRoutes;

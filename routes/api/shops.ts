@@ -1,25 +1,28 @@
-import { Request, Response, Router, NextFunction } from "express";
-import Shop from "../../models/Shop";
-import Product from "../../models/Product";
+import {
+  Request,
+  Response,
+  Router,
+  NextFunction
+} from 'express';
+import mongoose from "mongoose";
+import Shop from '../../models/Shop';
+import Product from '../../models/Product';
 
 const shopRoutes = Router();
 
-shopRoutes.get("",
-  // auth.required,
+shopRoutes.get('',
   (req: Request, res: Response, next: NextFunction) => {
     Shop.find({})
+      .populate({ path: 'products', model: Product })
       .then(shops => {
-        if (!shops) {
-          return res.sendStatus(404);
-        }
+        if (!shops) { return res.sendStatus(404); }
 
-        return res.json({ shops: shops });
-      })
-      .catch(next);
+        return res.json({ shops });
+      }).catch(next);
   }
 );
-shopRoutes.post("",
-  // auth.required,
+
+shopRoutes.post('',
   (req: Request, res: Response, next: NextFunction) => {
     const shop = new Shop();
 
@@ -28,18 +31,18 @@ shopRoutes.post("",
     shop.latitude = req.body.shop.latitude;
 
     shop.save().then(shop => {
-      if (!shop) {
-        return res.sendStatus(404);
-      }
+      if (!shop) { return res.sendStatus(404); }
       return res.json({ shop });
     })
       .catch(next);
   }
 );
-shopRoutes.get("/:shopId",
+
+shopRoutes.get('/:shopId',
   // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
+      .populate({ path: 'products', model: Product })
       .then(shop => {
         if (!shop) {
           return res.sendStatus(404);
@@ -50,24 +53,61 @@ shopRoutes.get("/:shopId",
       .catch(next);
   }
 );
-shopRoutes.put("/:shopId",
+
+shopRoutes.put('/:shopId',
   // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
+      .populate({ path: 'products', model: Product })
       .then(shop => {
-        if (!shop) {
-          return res.sendStatus(404);
+        if (!shop) { return res.sendStatus(404); }
+        // only update fields that were actually passed...
+        if (typeof req.body.product.name !== 'undefined') {
+          shop.name = req.body.product.name;
         }
-        return res.json({ shop });
+        if (typeof req.body.product.latitude !== 'undefined') {
+          shop.latitude = req.body.product.latitude;
+        }
+        if (typeof req.body.product.longitude !== 'undefined') {
+          shop.longitude = req.body.product.longitude;
+        }
+
+        return shop.save().then(function () {
+          return res.json({ shop });
+        });
       })
       .catch(next);
   }
 );
-shopRoutes.get("/:shopId/products",
+
+shopRoutes.post('/:shopId',
+  (req: Request, res: Response, next: NextFunction) => {
+    Shop.findById(req.params.shopId).then((shop) => {
+      if (!shop) { return res.sendStatus(404); }
+      shop._id = mongoose.Types.ObjectId();
+      // Important to save as new document
+      shop.isNew = true;
+      return shop.save().then(function () {
+        return res.json({ shop });
+      });
+    }).catch(next);
+  });
+
+shopRoutes.delete('/:shopId',
+  (req: Request, res: Response, next: NextFunction) => {
+    Shop.findById(req.params.shopId).then((shop) => {
+      if (!shop) { return res.sendStatus(404); }
+      return shop.remove().then(function () {
+        return res.json({ shop });
+      });
+    }).catch(next);
+  });
+
+shopRoutes.get('/:shopId/products',
   // auth.required,
-  (req, res, next) => {
+  (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
-      .populate({ path: "products", model: Product })
+      .populate({ path: 'products', model: Product })
       .then(shop => {
         if (!shop) {
           return res.sendStatus(404);
@@ -99,8 +139,8 @@ shopRoutes.post('/:shopId/products/:productId',
 /**
  * 
  */
-shopRoutes.put("/:shopId/products/:productId",
-  (req, res, next) => {
+shopRoutes.put('/:shopId/products/:productId',
+  (req: Request, res: Response, next: NextFunction) => {
     Shop.findById(req.params.shopId)
       .then(shop => {
         if (!shop) { return res.sendStatus(404); }
@@ -131,4 +171,5 @@ shopRoutes.delete('/:shopId/products/:productId',
           });
       }).catch(next);
   });
+
 export default shopRoutes;

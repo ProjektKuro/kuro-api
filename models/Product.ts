@@ -3,6 +3,7 @@ import { Schema, model, Model, Document } from 'mongoose';
 interface IProduct extends Document {
   name: string;
   description: string;
+  quantity: number;
   shops: any[];
 }
 interface IProductModel extends Model<IProduct> {
@@ -23,6 +24,7 @@ interface IProductModel extends Model<IProduct> {
 var ProductSchema = new Schema({
   name: String,
   description: String,
+  quantity: Number,
   shops: [{ type: Schema.Types.ObjectId, ref: 'Shop' }],
   categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
 }, { timestamps: true, usePushEach: true });
