@@ -30,12 +30,46 @@
 				},
 				{
 					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f39fb4be-2b39-4603-8405-f9554aaa3a29",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var user = responseJSON.user || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = user.hasOwnProperty('_id');",
+									"    tests['Response has \"username\" property'] = user.hasOwnProperty('username');",
+									"    tests['Response has \"email\" property'] = user.hasOwnProperty('email');",
+									"    tests['Response has \"createdAt\" property'] = user.hasOwnProperty('createdAt');",
+									"    tests['Response\\'s \"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(user.createdAt);",
+									"    tests['Response has \"updatedAt\" property'] = user.hasOwnProperty('updatedAt');",
+									"    tests['Response\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(user.updatedAt);",
+									"    ",
+									"    if (tests['Response has \"_id\" property']) {",
+									"        pm.globals.set('userId', user._id);",
+									"        tests['Global variable \"productId\" has been set'] = pm.globals.get('userId') === user._id;",
+									"    }",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"user\":{\n\t\t\"username\": \"Test\",\n\t\t\"email\": \"bla@mail.com\"\n\t}\n}",
+							"raw": "{\n\t\"user\":{\n\t\t\"username\": \"Test{{$randomInt}}\",\n\t\t\"email\": \"bla{{$randomInt}}@mail.com\"\n\t}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -52,6 +86,115 @@
 							"path": [
 								"api",
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var user = responseJSON.user || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = user.hasOwnProperty('_id');",
+									"    tests['Response has \"username\" property'] = user.hasOwnProperty('username');",
+									"    tests['Response has \"email\" property'] = user.hasOwnProperty('email');",
+									"    tests['Response has \"createdAt\" property'] = user.hasOwnProperty('createdAt');",
+									"    tests['Response\\'s \"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(user.createdAt);",
+									"    tests['Response has \"updatedAt\" property'] = user.hasOwnProperty('updatedAt');",
+									"    tests['Response\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(user.updatedAt);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1337/api/users/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
+								"exec": [
+									"if(!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var user = responseJSON.user || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = user.hasOwnProperty('_id');",
+									"    tests['Response has \"username\" property'] = user.hasOwnProperty('username');",
+									"    tests['Response has \"email\" property'] = user.hasOwnProperty('email');",
+									"    tests['Response has \"createdAt\" property'] = user.hasOwnProperty('createdAt');",
+									"    tests['Response\\'s \"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(user.createdAt);",
+									"    tests['Response has \"updatedAt\" property'] = user.hasOwnProperty('updatedAt');",
+									"    tests['Response\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(user.updatedAt);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\": {\n\t\t\"username\": \"Changed{{$randomInt}}\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/users/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"users",
+								"{{userId}}"
 							]
 						}
 					},
