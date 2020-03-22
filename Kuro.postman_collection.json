@@ -14,12 +14,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/api/users",
+							"raw": "http://localhost:1337/api/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3030",
+							"port": "1337",
 							"path": [
 								"api",
 								"users"
@@ -43,12 +43,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/api/users",
+							"raw": "http://localhost:1337/api/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3030",
+							"port": "1337",
 							"path": [
 								"api",
 								"users"
@@ -69,12 +69,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/api/products",
+							"raw": "http://localhost:1337/api/products",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3030",
+							"port": "1337",
 							"path": [
 								"api",
 								"products"
@@ -128,12 +128,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/api/products",
+							"raw": "http://localhost:1337/api/products",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3030",
+							"port": "1337",
 							"path": [
 								"api",
 								"products"
@@ -173,16 +173,165 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/api/products/{{productId}}",
+							"raw": "http://localhost:1337/api/products/{{productId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3030",
+							"port": "1337",
 							"path": [
 								"api",
 								"products",
 								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Shops that have Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"shops\" property'] = responseJSON.hasOwnProperty('shops');",
+									"    tests['Response has \"shops\" property is an Array'] = Array.isArray(responseJSON['shops']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/products/{{productId}}/shops",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"products",
+								"{{productId}}",
+								"shops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Shop by ID to Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"shops\" property'] = responseJSON.hasOwnProperty('shops');",
+									"    tests['Response has \"shops\" property is an Array'] = Array.isArray(responseJSON['shops']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/products/{{productId}}/shops/{{shopId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"products",
+								"{{productId}}",
+								"shops",
+								"{{shopId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Shop by ID from Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"shops\" property'] = responseJSON.hasOwnProperty('shops');",
+									"    tests['Response has \"shops\" property is an Array'] = Array.isArray(responseJSON['shops']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/products/{{productId}}/shops/{{shopId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"products",
+								"{{productId}}",
+								"shops",
+								"{{shopId}}"
 							]
 						}
 					},
@@ -196,7 +345,7 @@
 							"script": {
 								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
 								"exec": [
-									"if (!(environment.isIntegrationTest)) {",
+									"if(!(environment.isIntegrationTest)) {",
 									"var is200Response = responseCode.code === 200;",
 									"",
 									"tests['Response code is 200 OK'] = is200Response;",
@@ -208,6 +357,7 @@
 									"    tests['Response has \"_id\" property'] = product.hasOwnProperty('_id');",
 									"    tests['Response has \"name\" property'] = product.hasOwnProperty('name');",
 									"    tests['Response has \"description\" property'] = product.hasOwnProperty('description');",
+									"    tests['Response has \"quantity\" property'] = product.hasOwnProperty('quantity');",
 									"    ",
 									"    tests['\"name\" property has been updated'] = product['name'] === 'Honig';",
 									"    tests['\"description\" property has been updated'] = product['description'] === 'Bienenkotze';",
@@ -223,7 +373,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"product\": {\n\t\t\"name\": \"Honig\",\n\t\t\"description\": \"Bienenkotze\"\n\t}\n}",
+							"raw": "{\n\t\"product\": {\n\t\t\"name\": \"Honig\",\n\t\t\"description\": \"Bienenkotze\",\n\t\t\"quantity\": 1\n\t}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -231,12 +381,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3030/api/products/{{productId}}",
+							"raw": "http://localhost:1337/api/products/{{productId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3030",
+							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -282,12 +432,12 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/api/products/{{productId}}",
+							"raw": "http://localhost:1337/api/products/{{productId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3030",
+							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -299,20 +449,494 @@
 				},
 				{
 					"name": "Delete Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "be73f3b0-b1e1-4ecb-9f36-6e8824a061a3",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3030/api/products/{{productId}}",
+							"raw": "http://localhost:1337/api/products/{{productId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3030",
+							"port": "1337",
 							"path": [
 								"api",
 								"products",
 								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Shops",
+			"item": [
+				{
+					"name": "Get All Shops",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1337/api/shops",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"shops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Shop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b7670d5d-4a65-4daa-9c23-257a7b34b268",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var shop = responseJSON.shop || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = shop.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = shop.hasOwnProperty('name');",
+									"    tests['Response has \"latitude\" property'] = shop.hasOwnProperty('latitude');",
+									"    tests['Response has \"longitude\" property'] = shop.hasOwnProperty('longitude');",
+									"    ",
+									"    tests['Response has \"products\" property'] = shop.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(shop['products']);",
+									"    tests['Response has \"createdAt\" property'] = shop.hasOwnProperty('createdAt');",
+									"    tests['Response\\'s \"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.createdAt);",
+									"    tests['Response has \"updatedAt\" property'] = shop.hasOwnProperty('updatedAt');",
+									"    tests['Response\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.updatedAt);",
+									"    ",
+									"    if (tests['Response has \"_id\" property']) {",
+									"        pm.globals.set('shopId', shop._id);",
+									"        tests['Global variable \"shopId\" has been set'] = pm.globals.get('shopId') === shop._id;",
+									"    }",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"shop\": {\n\t\t\"name\": \"Norma(nnen)\",\n\t\t\"latitude\": \"14.99123\",\n\t\t\"longitude\": \"89.001\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/shops",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"shops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Shop by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var shop = responseJSON.shop || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = shop.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = shop.hasOwnProperty('name');",
+									"    tests['Response has \"latitude\" property'] = shop.hasOwnProperty('latitude');",
+									"    tests['Response has \"longitude\" property'] = shop.hasOwnProperty('longitude');",
+									"    tests['Response has \"products\" property'] = shop.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(shop['products']);",
+									"    tests['Response has \"createdAt\" property'] = shop.hasOwnProperty('createdAt');",
+									"    tests['Response\\'s \"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.createdAt);",
+									"    tests['Response has \"updatedAt\" property'] = shop.hasOwnProperty('updatedAt');",
+									"    tests['Response\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.updatedAt);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1337/api/shops/{{shopId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"shops",
+								"{{shopId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products of Shop by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"products\" property'] = responseJSON.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(responseJSON['products']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/shops/{{shopId}}/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"shops",
+								"{{shopId}}",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product by ID to Shop by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"products\" property'] = responseJSON.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(responseJSON['products']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/shops/{{shopId}}/products/{{productId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"shops",
+								"{{shopId}}",
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product by ID from  Shop by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"products\" property'] = responseJSON.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(responseJSON['products']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/shops/{{shopId}}/products/{{productId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"shops",
+								"{{shopId}}",
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Shop by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var shop = responseJSON.shop || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = shop.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = shop.hasOwnProperty('name');",
+									"    tests['Response has \"latitude\" property'] = shop.hasOwnProperty('latitude');",
+									"    tests['Response has \"longitude\" property'] = shop.hasOwnProperty('longitude');",
+									"    ",
+									"    ",
+									"    tests['\"name\" property has been updated'] = shop['name'] === 'Ed & Eka';",
+									"    tests['\"latitude\" property has been updated'] = shop['latitude'] === 56.8237;",
+									"    tests['\"latitude\" property has been updated'] = shop['longitude'] === 44.9211;",
+									"    ",
+									"    tests['Response has \"products\" property'] = shop.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(shop['products']);",
+									"    tests['Response has \"createdAt\" property'] = shop.hasOwnProperty('createdAt');",
+									"    tests['Response\\'s \"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.createdAt);",
+									"    tests['Response has \"updatedAt\" property'] = shop.hasOwnProperty('updatedAt');",
+									"    tests['Response\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.updatedAt);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"product\": {\n\t\t\"name\": \"Ed & Eka\",\n\t\t\"latitude\": \"56.8237\",\n\t\t\"longitude\": \"44.9211\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:1337/api/shops/{{shopId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"shops",
+								"{{shopId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copy Shop by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e3cab6ef-63af-49d6-bab0-4d74b4bb599b",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var shop = responseJSON.shop || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = shop.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = shop.hasOwnProperty('name');",
+									"    tests['Response has \"latitude\" property'] = shop.hasOwnProperty('latitude');",
+									"    tests['Response has \"longitude\" property'] = shop.hasOwnProperty('longitude');",
+									"    tests['Response has \"products\" property'] = shop.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(shop['products']);",
+									"    tests['Response has \"createdAt\" property'] = shop.hasOwnProperty('createdAt');",
+									"    tests['Response\\'s \"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.createdAt);",
+									"    tests['Response has \"updatedAt\" property'] = shop.hasOwnProperty('updatedAt');",
+									"    tests['Response\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.updatedAt);",
+									"    ",
+									"    if (tests['Response has \"_id\" property']) {",
+									"        pm.globals.set('shopId', shop._id);",
+									"        tests['Global variable \"shopId\" has been set'] = pm.globals.get('shopId') === shop._id;",
+									"    }",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1337/api/shops/{{shopId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"shops",
+								"{{shopId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Shop by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c08bb810-624e-4362-ad92-73d77fb72843",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:1337/api/shops/{{shopId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "1337",
+							"path": [
+								"api",
+								"shops",
+								"{{shopId}}"
 							]
 						}
 					},
