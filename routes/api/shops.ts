@@ -137,7 +137,7 @@ shopRoutes.post('/:shopId/products/:productId',
   });
 
 /**
- * 
+ * Updats a product by id in a shop by id
  */
 shopRoutes.put('/:shopId/products/:productId',
   (req: Request, res: Response, next: NextFunction) => {
