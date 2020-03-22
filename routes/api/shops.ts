@@ -1,15 +1,10 @@
-import mongoose from "mongoose";
 import { Request, Response, Router, NextFunction } from "express";
-import passport from "passport";
-import { model } from "mongoose";
-import { auth } from "../auth";
 import Shop from "../../models/Shop";
 import Product from "../../models/Product";
 
 const shopRoutes = Router();
 
-shopRoutes.get(
-  "",
+shopRoutes.get("",
   // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
     Shop.find({})
@@ -23,8 +18,7 @@ shopRoutes.get(
       .catch(next);
   }
 );
-shopRoutes.post(
-  "",
+shopRoutes.post("",
   // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
     const shop = new Shop();
@@ -33,8 +27,33 @@ shopRoutes.post(
     shop.longitude = req.body.shop.longitude;
     shop.latitude = req.body.shop.latitude;
 
-    shop
-      .save()
+    shop.save().then(shop => {
+      if (!shop) {
+        return res.sendStatus(404);
+      }
+      return res.json({ shop });
+    })
+      .catch(next);
+  }
+);
+shopRoutes.get("/:shopId",
+  // auth.required,
+  (req: Request, res: Response, next: NextFunction) => {
+    Shop.findById(req.params.shopId)
+      .then(shop => {
+        if (!shop) {
+          return res.sendStatus(404);
+        }
+
+        return res.json({ shop });
+      })
+      .catch(next);
+  }
+);
+shopRoutes.put("/:shopId",
+  // auth.required,
+  (req: Request, res: Response, next: NextFunction) => {
+    Shop.findById(req.params.shopId)
       .then(shop => {
         if (!shop) {
           return res.sendStatus(404);
@@ -44,38 +63,7 @@ shopRoutes.post(
       .catch(next);
   }
 );
-shopRoutes.get(
-  "/:shopId",
-  // auth.required,
-  (req: Request, res: Response, next: NextFunction) => {
-    Shop.findById(req.params.shopId)
-      .then(shop => {
-        if (!shop) {
-          return res.sendStatus(404);
-        }
-
-        return res.json({ shop: shop });
-      })
-      .catch(next);
-  }
-);
-shopRoutes.put(
-  "/:shopId",
-  // auth.required,
-  (req: Request, res: Response, next: NextFunction) => {
-    Shop.findById(req.params.shopId)
-      .then(shop => {
-        if (!shop) {
-          return res.sendStatus(404);
-        }
-        shop = req.body.shop;
-        return res.json({ shop: shop });
-      })
-      .catch(next);
-  }
-);
-shopRoutes.get(
-  "/:shopId/products",
+shopRoutes.get("/:shopId/products",
   // auth.required,
   (req, res, next) => {
     Shop.findById(req.params.shopId)
@@ -90,44 +78,34 @@ shopRoutes.get(
       .catch(next);
   }
 );
-shopRoutes.post(
-  "/:shopId/products/:productId",
-  // auth.required,
+
+/**
+ * Adds an existing product by id to a shop by id
+ */
+shopRoutes.post('/:shopId/products/:productId',
+  (req: Request, res: Response, next: NextFunction) => {
+    Product.findById(req.params.productId)
+      .then((product) => {
+        if (!product) { return res.sendStatus(404); }
+        return Shop.findOneAndUpdate(
+          { _id: req.params.shopId },
+          { $push: { products: product } }).then((shop) => {
+            if (!shop) { return res.sendStatus(404); }
+            return res.json({ products: shop.products });
+          });
+      }).catch(next);
+  });
+
+/**
+ * 
+ */
+shopRoutes.put("/:shopId/products/:productId",
   (req, res, next) => {
     Shop.findById(req.params.shopId)
       .then(shop => {
-        if (!shop) {
-          return res.sendStatus(404);
-        }
-        if (!shop.products) {
-          return res.json({ shop: [] });
-        }
-        const product = new Product();
-        product.name = req.body.productId;
-        product.description = req.body.description;
-
-        product.save().then(function () {
-          return res.json({ product });
-        }).catch(next);
-        return res.sendStatus(500);
-      })
-      .catch(next);
-      return res.sendStatus(504);
-    }
-);
-
-shopRoutes.put(
-  "/:shopId/products/:productId",
-  // auth.required,
-  (req, res, next) => {
-    Shop.findById(req.params.id)
-      .then(shop => {
-        if (!shop) {
-          return res.sendStatus(404);
-        }
+        if (!shop) { return res.sendStatus(404); }
         const bodyShop = req.body.shop;
-        return bodyShop.save().then(function() {
-          
+        return bodyShop.save().then(() => {
           return res.json({ shop: shop });
         });
       })
@@ -135,4 +113,22 @@ shopRoutes.put(
   }
 );
 
+shopRoutes.delete('/:shopId/products/:productId',
+  (req: Request, res: Response, next: NextFunction) => {
+    Shop.findById(req.params.shopId)
+      .populate({ path: 'products', model: Product })
+      .then((shop) => {
+        if (!shop) { return res.sendStatus(404); }
+        // Find the product
+        return Product.findById(req.params.productId)
+          .then((product) => {
+            if (!product) { return res.sendStatus(404); }
+            return shop.update({ products: product._id }, {
+              '$pull': { products: product._id }
+            }).then(() => {
+              return res.json({ products: shop.products });
+            });
+          });
+      }).catch(next);
+  });
 export default shopRoutes;
