@@ -5,6 +5,7 @@ import {
   NextFunction
 } from "express";
 import Product from "../../models/Product";
+import Shop from "../../models/Shop";
 import mongoose from "mongoose";
 
 const productsRoutes = Router();
@@ -88,18 +89,18 @@ productsRoutes.delete('/:productId',
     }).catch(next);
   });
 
-productsRoutes.get('/:pid/shops',
+productsRoutes.get('/:productId/shops',
   (req: Request, res: Response, next: NextFunction) => {
-    Product.findById(req.params.id).then((product) => {
+    Product.findById(req.params.productId).populate({ path: 'shops', model: Shop }).then((product) => {
       if (!product) { return res.sendStatus(404); }
 
-      return res.json({ product });
+      return res.json({ shops: product.shops });
     }).catch(next);
   });
 
 productsRoutes.post('/:pid/shops',
   (req: Request, res: Response, next: NextFunction) => {
-    Product.findById(req.params.id).then((product) => {
+    Product.findById(req.params.id).populate('shops').then((product) => {
       if (!product) { return res.sendStatus(404); }
 
       return res.json({ product });
@@ -117,27 +118,10 @@ productsRoutes.get('/:pid/shops/:sid',
 
 productsRoutes.put('/:pid/shops/:sid',
   (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.params.id)
     Product.findById(req.params.id).then((product) => {
       if (!product) {
         return res.sendStatus(401);
       }
-      // only update fields that were actually passed...
-      // if (typeof req.body.product.productname !== 'undefined') {
-      //   product.productname = req.body.product.productname;
-      // }
-      // if (typeof req.body.product.email !== 'undefined') {
-      //   product.email = req.body.product.email;
-      // }
-      // if (typeof req.body.product.bio !== 'undefined') {
-      //   product.bio = req.body.product.bio;
-      // }
-      // if (typeof req.body.product.image !== 'undefined') {
-      //   product.image = req.body.product.image;
-      // }
-      // if (typeof req.body.product.password !== 'undefined') {
-      //   product.setPassword(req.body.product.password);
-      // }
 
       return product.save().then(function () {
         return res.json({ product: product });
