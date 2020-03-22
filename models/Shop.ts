@@ -9,8 +9,6 @@ interface IShop extends Document {
 interface IShopModel extends Model<IShop> {
 }
 
-export interface Shop extends IShop { }
-
 /**
  * Database definition for the `Shop` relation
  * 

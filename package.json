@@ -26,7 +26,7 @@
     "dev": "nodemon --config ./nodemon-config.json ./app.ts",
     "test": "newman run ./tests/api-tests.postman.json -e ./tests/env-api-tests.postman.json",
     "stop": "lsof -ti :3000 | xargs kill",
-    "server": "nodemon --watch server dist/app.js --exec babel-node",
+    "forever": "forever start dist/app.js -l dist/foreverLog.log -o dist/foreverOut.log -e dist/foreverErr.log",
     "mongo:stop": "docker stop realworld-mongo && docker rm realworld-mongo"
   },
   "repository": {

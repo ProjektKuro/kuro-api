@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import Address from '../../models/Address';
 import Shop from '../../models/Shop';
 import Product from '../../models/Product';
+import { request } from 'http';
 
 const shopRoutes = Router();
 
@@ -18,11 +19,16 @@ shopRoutes.get('',
       find = {
         location: {
           $near: {
-            $maxDistance: +req.query.distance || 5000,
-            $geometry: { type: 'Point', coordinates: [+req.query.lat, +req.query.long] }
-          }
-        }
+            $geometry: {
+              type: 'Point',
+              coordinates: [req.query.lat, req.query.long],
+            },
+            $maxDistance: +req.query.distance,
+          },
+        },
       };
+    } if(!!req.query.q){
+      find['name'] = req.query.q;
     }
     Shop.find(find)
       .populate([
@@ -31,7 +37,7 @@ shopRoutes.get('',
       ])
       .then(shops => {
         if (!shops) { return res.sendStatus(404); }
-
+        console.log(shops[0].products)
         return res.json({ shops });
       }).catch(next);
   }
@@ -90,6 +96,7 @@ shopRoutes.put('/:shopId',
           typeof req.body.shop.latitude !== 'undefined' &&
           typeof req.body.shop.longitude !== 'undefined'
         ) {
+
           shop.location = {
             type: "Point",
             coordinates: [req.body.shop.latitude, req.body.shop.longitude]

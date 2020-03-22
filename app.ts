@@ -55,8 +55,7 @@ app.use(require('./routes'));
 /// catch 404 and forward to error handler
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
   let err = new Error('Not Found');
-  // TODO: add status
-  // err.status = 404;
+  err['status'] = 404;
   next(err);
 });
 
@@ -73,7 +72,8 @@ if (!isProduction) {
     res.json({
       'errors': {
         message: err.message,
-        error: err
+        error: err,
+        stack: err.stack
       }
     });
   });

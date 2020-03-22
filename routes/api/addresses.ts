@@ -30,13 +30,12 @@ addressRoutes.post('',
     address.address2 = req.body.address.address2;
     address.district = req.body.address.district;
     address.city = req.body.address.city;
-    address.postralCode = req.body.address.postralCode;
+    address.postalCode = req.body.address.postalCode;
 
     address.save().then(address => {
       if (!address) { return res.sendStatus(404); }
       return res.json({ address });
-    })
-      .catch(next);
+    }).catch(next);
   }
 );
 
@@ -72,8 +71,8 @@ addressRoutes.put('/:addressId',
         if (typeof req.body.address.city !== 'undefined') {
           address.city = req.body.address.city;
         }
-        if (typeof req.body.address.postralCode !== 'undefined') {
-          address.postralCode = req.body.address.postralCode;
+        if (typeof req.body.address.postalCode !== 'undefined') {
+          address.postalCode = req.body.address.postalCode;
         }
 
         return address.save().then(function () {
