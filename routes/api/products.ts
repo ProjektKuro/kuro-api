@@ -91,11 +91,12 @@ productsRoutes.delete('/:productId',
 
 productsRoutes.get('/:productId/shops',
   (req: Request, res: Response, next: NextFunction) => {
-    Product.findById(req.params.productId).populate({ path: 'shops', model: Shop }).then((product) => {
-      if (!product) { return res.sendStatus(404); }
+    Product.findById(req.params.productId).populate({ path: 'shops', model: Shop })
+      .then((product) => {
+        if (!product) { return res.sendStatus(404); }
 
-      return res.json({ shops: product.shops });
-    }).catch(next);
+        return res.json({ shops: product.shops });
+      }).catch(next);
   });
 
 productsRoutes.post('/:pid/shops',

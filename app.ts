@@ -42,7 +42,7 @@ if (!isProduction) {
 if (isProduction) {
   mongoose.connect(constants.mongoConnectionString);
 } else {
-  mongoose.connect('mongodb://localhost/conduit');
+  mongoose.connect('mongodb://localhost/kuro');
   mongoose.set('debug', true);
 }
 
