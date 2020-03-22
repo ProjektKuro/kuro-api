@@ -17,7 +17,7 @@ shopRoutes.get(
           return res.sendStatus(404);
         }
 
-        return res.json({ user: user });
+        return res.json({ shops: shops });
       })
       .catch(next);
   }
@@ -27,12 +27,12 @@ shopRoutes.post(
   // auth.required,
   (req: Request, res: Response, next: NextFunction) => {
     Shop.find({})
-      .then(user => {
-        if (!user) {
+      .then(shops => {
+        if (!shops) {
           return res.sendStatus(404);
         }
 
-        return res.json({ user: user });
+        return res.json({ shop: shop });
       })
       .catch(next);
   }
