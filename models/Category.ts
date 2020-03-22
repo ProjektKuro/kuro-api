@@ -3,6 +3,7 @@ import { Schema, model, Model, Document } from 'mongoose';
 interface ICategory extends Document {
   name: string;
   description: string;
+  products: any[];
 }
 interface ICategoryModel extends Model<ICategory> {
 }
