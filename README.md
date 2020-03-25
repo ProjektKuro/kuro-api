@@ -8,6 +8,7 @@ um so beispielsweise dem "hamstern" beim einkaufen vorzubeugen.
 
 Die Komponente realisiert einen API Server, mit dem `Kuro` Clients kommunizieren können,
 um Informationen zu erlangen oder serverseitig aufzufrischen.
+Die derzeitige Dokumentation der API kann [hier](https://documenter.getpostman.com/view/4294690/SzS8s5Jf?version=latest) gefunden werden.
 
 Die Projekt Basis ist dieses `ExpressJs` & `MongoDb` Boilerplate Projekt von [gothinkster](./GoThinkster.md), welches wir um `Typescript`erweitert haben.
 
