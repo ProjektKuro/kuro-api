@@ -16,11 +16,12 @@ const productRoutes = Router();
 */
 productRoutes.get('',
   (req: Request, res: Response, next: NextFunction) => {
+    const perPage = +req.query.pageSize || 100;
+    const page = +req.query.page || 0;
+
     Product.find({})
-      .populate([
-        { path: 'shops', model: Shop },
-        { path: 'categories', model: Category }
-      ])
+      .limit(perPage)
+      .skip(perPage * page)
       .then((products) => {
         if (!products) { return res.sendStatus(404); }
 
@@ -47,10 +48,7 @@ productRoutes.post('',
 productRoutes.get('/:productId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
-      .populate([
-        { path: 'shops', model: Shop },
-        { path: 'categories', model: Category }
-      ])
+
       .then((product) => {
         if (!product) { return res.sendStatus(404); }
 
@@ -105,10 +103,7 @@ productRoutes.delete('/:productId',
 productRoutes.get('/:productId/shops',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
-      .populate([
-        { path: 'shops', model: Shop },
-        { path: 'categories', model: Category }
-      ])
+
       .then((product) => {
         if (!product) { return res.sendStatus(404); }
 
@@ -119,10 +114,7 @@ productRoutes.get('/:productId/shops',
 productRoutes.put('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
-      .populate([
-        { path: 'shops', model: Shop },
-        { path: 'categories', model: Category }
-      ])
+
       .then((product) => {
         if (!product) { return res.sendStatus(401); }
         // Find the store
@@ -172,10 +164,7 @@ productRoutes.post('/:productId/shops/:shopId',
 productRoutes.delete('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
-      .populate([
-        { path: 'shops', model: Shop },
-        { path: 'categories', model: Category }
-      ])
+
       .then((product) => {
         if (!product) { return res.sendStatus(404); }
         // Find the store

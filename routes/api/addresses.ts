@@ -7,13 +7,24 @@ import {
 import mongoose from "mongoose";
 import Address from '../../models/Address';
 import Shop from '../../models/Shop';
+import { parseIncludes } from '../helper';
 
 const addressRoutes = Router();
 
 addressRoutes.get('',
   (req: Request, res: Response, next: NextFunction) => {
+    const include = [];
+    if (req.query.include) {
+      let requestedIncludes = parseIncludes(req.query.include);
+      if (requestedIncludes.indexOf('shops') !== -1) { include.push({ path: 'shops', model: Shop }); }
+    }
+    const perPage = +req.query.pageSize || 100;
+    const page = +req.query.page || 0;
+
     Address.find({})
-      .populate({ path: 'shops', model: Shop })
+      .limit(perPage)
+      .skip(perPage * page)
+      .populate(include)
       .then(addresses => {
         if (!addresses) { return res.sendStatus(404); }
 
@@ -41,8 +52,13 @@ addressRoutes.post('',
 
 addressRoutes.get('/:addressId',
   (req: Request, res: Response, next: NextFunction) => {
+    const include = [];
+    if (req.query.include) {
+      let requestedIncludes = parseIncludes(req.query.include);
+      if (requestedIncludes.indexOf('shops') !== -1) { include.push({ path: 'shops', model: Shop }); }
+    }
     Address.findById(req.params.addressId)
-      .populate({ path: 'shops', model: Shop })
+      .populate(include)
       .then(address => {
         if (!address) { return res.sendStatus(404); }
 
@@ -54,8 +70,13 @@ addressRoutes.get('/:addressId',
 
 addressRoutes.put('/:addressId',
   (req: Request, res: Response, next: NextFunction) => {
+    const include = [];
+    if (req.query.include) {
+      let requestedIncludes = parseIncludes(req.query.include);
+      if (requestedIncludes.indexOf('shops') !== -1) { include.push({ path: 'shops', model: Shop }); }
+    }
     Address.findById(req.params.addressId)
-      .populate({ path: 'shops', model: Shop })
+      .populate(include)
       .then(address => {
         if (!address) { return res.sendStatus(404); }
         // only update fields that were actually passed...
@@ -108,8 +129,13 @@ addressRoutes.delete('/:addressId',
 
 addressRoutes.get('/:addressId/shops',
   (req: Request, res: Response, next: NextFunction) => {
+    const include = [];
+    if (req.query.include) {
+      let requestedIncludes = parseIncludes(req.query.include);
+      if (requestedIncludes.indexOf('shops') !== -1) { include.push({ path: 'shops', model: Shop }); }
+    }
     Address.findById(req.params.addressId)
-      .populate({ path: 'shops', model: Shop })
+      .populate(include)
       .then(address => {
         if (!address) { return res.sendStatus(404); }
 
@@ -121,8 +147,13 @@ addressRoutes.get('/:addressId/shops',
 
 addressRoutes.delete('/:addressId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
+    const include = [];
+    if (req.query.include) {
+      let requestedIncludes = parseIncludes(req.query.include);
+      if (requestedIncludes.indexOf('shops') !== -1) { include.push({ path: 'shops', model: Shop }); }
+    }
     Address.findById(req.params.addressId)
-      .populate({ path: 'shops', model: Shop })
+      .populate(include)
       .then((address) => {
         if (!address) { return res.sendStatus(404); }
         // Find the shop

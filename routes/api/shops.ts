@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 import Address from '../../models/Address';
 import Shop from '../../models/Shop';
 import Product from '../../models/Product';
-import { request } from 'http';
+import { parseIncludes } from '../helper';
 
 const shopRoutes = Router();
 
@@ -28,14 +28,22 @@ shopRoutes.get('',
         },
       };
     }
+    const include = [];
+    if (req.query.include) {
+      let requestedIncludes = parseIncludes(req.query.include);
+      if (requestedIncludes.indexOf('products') !== -1) { include.push({ path: 'products', model: Product }); }
+      if (requestedIncludes.indexOf('address') !== -1) { include.push({ path: 'address', model: Address }); }
+    }
     // if (!!req.query.q) {
     //   find['$text'] = { "$search": req.query.q }
     // }
+    const perPage = +req.query.pageSize || 100;
+    const page = +req.query.page || 0;
+
     Shop.find(find)
-      .populate([
-        { path: 'products', model: Product },
-        { path: 'address', model: Address }
-      ])
+      .limit(perPage)
+      .skip(perPage * page)
+      .populate(include)
       .then(shops => {
         if (!shops) { return res.sendStatus(404); }
 
@@ -63,11 +71,14 @@ shopRoutes.post('',
 
 shopRoutes.get('/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
+    const include = [];
+    if (req.query.include) {
+      let requestedIncludes = parseIncludes(req.query.include);
+      if (requestedIncludes.indexOf('products') !== -1) { include.push({ path: 'products', model: Product }); }
+      if (requestedIncludes.indexOf('address') !== -1) { include.push({ path: 'address', model: Address }); }
+    }
     Shop.findById(req.params.shopId)
-      .populate([
-        { path: 'products', model: Product },
-        { path: 'address', model: Address }
-      ])
+      .populate(include)
       .then(shop => {
         if (!shop) {
           return res.sendStatus(404);
@@ -81,11 +92,14 @@ shopRoutes.get('/:shopId',
 
 shopRoutes.put('/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
+    const include = [];
+    if (req.query.include) {
+      let requestedIncludes = parseIncludes(req.query.include);
+      if (requestedIncludes.indexOf('products') !== -1) { include.push({ path: 'products', model: Product }); }
+      if (requestedIncludes.indexOf('address') !== -1) { include.push({ path: 'address', model: Address }); }
+    }
     Shop.findById(req.params.shopId)
-      .populate([
-        { path: 'products', model: Product },
-        { path: 'address', model: Address }
-      ])
+      .populate(include)
       .then(shop => {
         if (!shop) { return res.sendStatus(404); }
         // only update fields that were actually passed...
@@ -136,11 +150,14 @@ shopRoutes.delete('/:shopId',
 
 shopRoutes.get('/:shopId/products',
   (req: Request, res: Response, next: NextFunction) => {
+    const include = [];
+    if (req.query.include) {
+      let requestedIncludes = parseIncludes(req.query.include);
+      if (requestedIncludes.indexOf('products') !== -1) { include.push({ path: 'products', model: Product }); }
+      if (requestedIncludes.indexOf('address') !== -1) { include.push({ path: 'address', model: Address }); }
+    }
     Shop.findById(req.params.shopId)
-      .populate([
-        { path: 'products', model: Product },
-        { path: 'address', model: Address }
-      ])
+      .populate(include)
       .then(shop => {
         if (!shop) {
           return res.sendStatus(404);
@@ -174,11 +191,14 @@ shopRoutes.post('/:shopId/products/:productId',
  */
 shopRoutes.put('/:shopId/products/:productId',
   (req: Request, res: Response, next: NextFunction) => {
+    const include = [];
+    if (req.query.include) {
+      let requestedIncludes = parseIncludes(req.query.include);
+      if (requestedIncludes.indexOf('products') !== -1) { include.push({ path: 'products', model: Product }); }
+      if (requestedIncludes.indexOf('address') !== -1) { include.push({ path: 'address', model: Address }); }
+    }
     Shop.findById(req.params.shopId)
-      .populate([
-        { path: 'products', model: Product },
-        { path: 'address', model: Address }
-      ])
+      .populate(include)
       .then((shop) => {
         if (!shop) { return res.sendStatus(401); }
         // Find the store
@@ -206,11 +226,14 @@ shopRoutes.put('/:shopId/products/:productId',
 
 shopRoutes.delete('/:shopId/products/:productId',
   (req: Request, res: Response, next: NextFunction) => {
+    const include = [];
+    if (req.query.include) {
+      let requestedIncludes = parseIncludes(req.query.include);
+      if (requestedIncludes.indexOf('products') !== -1) { include.push({ path: 'products', model: Product }); }
+      if (requestedIncludes.indexOf('address') !== -1) { include.push({ path: 'address', model: Address }); }
+    }
     Shop.findById(req.params.shopId)
-      .populate([
-        { path: 'products', model: Product },
-        { path: 'address', model: Address }
-      ])
+      .populate(include)
       .then((shop) => {
         if (!shop) { return res.sendStatus(404); }
         // Find the product
