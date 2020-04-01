@@ -2,14 +2,12 @@ import { Schema, model, Model, Document } from 'mongoose';
 
 interface IShop extends Document {
   name: string;
-  latitude: number;
-  longitude: number;
-  products: any;
+  location: any;
+  products: any[];
+  address: any;
 }
 interface IShopModel extends Model<IShop> {
 }
-
-export interface Shop extends IShop { }
 
 /**
  * Database definition for the `Shop` relation
@@ -24,10 +22,22 @@ export interface Shop extends IShop { }
  * 
  */
 var ShopSchema = new Schema({
-  name: String,
-  latitude: Number,
-  longitude: Number,
+  name: { type: String, text: true },
+  location: {
+    type: {
+      type: String, // Don't do `{ location: { type: String } }`
+      enum: ['Point'], // 'location.type' must be 'Point'
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  },
   products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
+  address: { type: Schema.Types.ObjectId, ref: 'Address' },
 }, { timestamps: true, usePushEach: true });
+
+ShopSchema.index({ location: "2dsphere" });
 
 export default model<IShop, IShopModel>('Shop', ShopSchema);

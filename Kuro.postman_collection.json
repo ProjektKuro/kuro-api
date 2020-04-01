@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "54fa8439-de96-4101-b8f3-68be14a8965c",
+		"_postman_id": "cdfd4578-95a8-4c6b-ab9b-1e761d566712",
 		"name": "Kuro",
+		"description": "## The KURO API \n\nThe api builds relationships between `shops`, `products`, `users` and `categories`\n\nWith the current situation in the world (SARS-COV2) \"the corona virus\", we aim to get the state of products in supermarkets. This should show what product is available at what quantity in which supermarket.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -14,12 +15,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/users",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/users",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"users"
@@ -77,12 +79,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/users",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/users",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"users"
@@ -126,12 +129,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/users/{{userId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/users/{{userId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"users",
@@ -185,12 +189,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/users/{{userId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/users/{{userId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"users",
@@ -212,12 +217,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/products",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/users",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products"
@@ -271,12 +277,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/products",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products"
@@ -316,12 +323,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -375,12 +383,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -425,12 +434,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}/shops",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}/shops",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -473,12 +483,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}/shops/{{shopId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}/shops/{{shopId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -534,12 +545,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}/shops/{{shopId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}/shops/{{shopId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -579,12 +591,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}/shops/{{shopId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}/shops/{{shopId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -631,12 +644,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}/categories",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}/categories",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -679,12 +693,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}/categories/{{categoryId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}/categories/{{categoryId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -732,7 +747,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"shop\": {\n\t\t\"name\": \"Liddl\",\n\t\t\"latitude\": \"1.2345\",\n\t\t\"longitude\": \"9.8765\"\n\t}\n}",
+							"raw": "{\n\t\"category\": {\n\t\t\"name\": \"Sonstiges\",\n\t\t\"description\": \"Alles andere\"\n\t}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -740,12 +755,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}/categories/{{categoryId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}/categories/{{categoryId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -772,8 +788,8 @@
 									"",
 									"if(is200Response){",
 									"    var responseJSON = JSON.parse(responseBody);",
-									"    tests['Response has \"shops\" property'] = responseJSON.hasOwnProperty('shops');",
-									"    tests['Response has \"shops\" property is an Array'] = Array.isArray(responseJSON['shops']);",
+									"    tests['Response has \"categories\" property'] = responseJSON.hasOwnProperty('categories');",
+									"    tests['Response has \"categories\" property is an Array'] = Array.isArray(responseJSON['categories']);",
 									"}",
 									"}"
 								],
@@ -785,12 +801,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}/categories/{{categoryId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}/categories/{{categoryId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -838,12 +855,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
@@ -875,16 +893,500 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/products/{{productId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/products/{{productId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"products",
 								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get All Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/categories",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b7670d5d-4a65-4daa-9c23-257a7b34b268",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var category = responseJSON.category || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = category.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = category.hasOwnProperty('name');",
+									"    tests['Response has \"description\" property'] = category.hasOwnProperty('description');",
+									"    ",
+									"    if (tests['Response has \"_id\" property']) {",
+									"        pm.globals.set('categoryId', category._id);",
+									"        tests['Global variable \"categoryId\" has been set'] = pm.globals.get('categoryId') === category._id;",
+									"    }",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"category\": {\n\t\t\"name\": \"Milchprodukte\",\n\t\t\"description\": \"Von der Kuh, oder Ziege, oder Schnabeltier\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/categories",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var category = responseJSON.category || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = category.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = category.hasOwnProperty('name');",
+									"    tests['Response has \"description\" property'] = category.hasOwnProperty('description');",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/categories/{{categoryId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"categories",
+								"{{categoryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
+								"exec": [
+									"if(!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var category = responseJSON.category || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = category.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = category.hasOwnProperty('name');",
+									"    tests['Response has \"description\" property'] = category.hasOwnProperty('description');",
+									"    ",
+									"    tests['\"name\" property has been updated'] = category['name'] === 'Fisch';",
+									"    tests['\"description\" property has been updated'] = category['description'] === 'Die, die schwimmen';",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"category\": {\n\t\t\"name\": \"Fisch\",\n\t\t\"description\": \"Die, die schwimmen\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/categories/{{categoryId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"categories",
+								"{{categoryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products of Category by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"products\" property'] = responseJSON.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(responseJSON['products']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/categories/{{categoryId}}/products",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"categories",
+								"{{categoryId}}",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product by ID to Category by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"products\" property'] = responseJSON.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(responseJSON['products']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/categories/{{categoryId}}/products/{{productId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"categories",
+								"{{categoryId}}",
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product by ID from Category by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
+								"exec": [
+									"if(!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var product = responseJSON.product || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = product.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = product.hasOwnProperty('name');",
+									"    tests['Response has \"description\" property'] = product.hasOwnProperty('description');",
+									"    tests['Response has \"quantity\" property'] = product.hasOwnProperty('quantity');",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"product\": {\n\t\t\"name\": \"Toilettenpapier\",\n\t\t\"description\": \"Bitte nur eine Packung, Leute\",\n\t\t\"quantity\": 50\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/categories/{{categoryId}}/products/{{productId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"categories",
+								"{{categoryId}}",
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product by ID from Category by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"products\" property'] = responseJSON.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(responseJSON['products']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/categories/{{categoryId}}/products/{{productId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"categories",
+								"{{categoryId}}",
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copy Category by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e3cab6ef-63af-49d6-bab0-4d74b4bb599b",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var category = responseJSON.category || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = category.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = category.hasOwnProperty('name');",
+									"    tests['Response has \"description\" property'] = category.hasOwnProperty('description');",
+									"    ",
+									"    if (tests['Response has \"_id\" property']) {",
+									"        pm.globals.set('categoryId', category._id);",
+									"        tests['Global variable \"categoryId\" has been set'] = pm.globals.get('categoryId') === category._id;",
+									"    }",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/categories/{{categoryId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"categories",
+								"{{categoryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "be73f3b0-b1e1-4ecb-9f36-6e8824a061a3",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/categories/{{categoryId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"categories",
+								"{{categoryId}}"
 							]
 						}
 					},
@@ -902,15 +1404,51 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/shops",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/shops",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"shops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Shops with query, Lat, Long, Distance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/shops?lat=14&long=89&distance=10000",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"shops"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "14"
+								},
+								{
+									"key": "long",
+									"value": "89"
+								},
+								{
+									"key": "distance",
+									"value": "10000"
+								}
 							]
 						}
 					},
@@ -969,12 +1507,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/shops",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/shops",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"shops"
@@ -1021,12 +1560,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/shops/{{shopId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/shops/{{shopId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"shops",
@@ -1071,12 +1611,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/shops/{{shopId}}/products",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/shops/{{shopId}}/products",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"shops",
@@ -1119,18 +1660,69 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/shops/{{shopId}}/products/{{productId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/shops/{{shopId}}/products/{{productId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"shops",
 								"{{shopId}}",
 								"products",
 								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Address by ID to Shop by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"address\" property'] = responseJSON.hasOwnProperty('address');",
+									"    tests['Response has \"address\" property is an Array'] = Array.isArray(responseJSON['address']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/shops/{{shopId}}/addresses/{{addressId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"shops",
+								"{{shopId}}",
+								"addresses",
+								"{{addressId}}"
 							]
 						}
 					},
@@ -1164,12 +1756,82 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/shops/{{shopId}}/products/{{productId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/shops/{{shopId}}/products/{{productId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
+							"path": [
+								"api",
+								"shops",
+								"{{shopId}}",
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product by ID from Shop by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var shop = responseJSON.shop || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = shop.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = shop.hasOwnProperty('name');",
+									"    tests['Response has \"latitude\" property'] = shop.hasOwnProperty('latitude');",
+									"    tests['Response has \"longitude\" property'] = shop.hasOwnProperty('longitude');",
+									"    ",
+									"    ",
+									"    tests['\"name\" property has been updated'] = shop['name'] === 'Ed & Eka';",
+									"    ",
+									"    tests['Response has \"products\" property'] = shop.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(shop['products']);",
+									"    tests['Response has \"createdAt\" property'] = shop.hasOwnProperty('createdAt');",
+									"    tests['Response\\'s \"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.createdAt);",
+									"    tests['Response has \"updatedAt\" property'] = shop.hasOwnProperty('updatedAt');",
+									"    tests['Response\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.updatedAt);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"product\": {\r\n\t\t\"name\": \"Honig\",\r\n\t\t\"description\": \"Bienenkotze\",\r\n\t\t\"quantity\": 1\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/shops/{{shopId}}/products/{{productId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
 							"path": [
 								"api",
 								"shops",
@@ -1205,8 +1867,6 @@
 									"    ",
 									"    ",
 									"    tests['\"name\" property has been updated'] = shop['name'] === 'Ed & Eka';",
-									"    tests['\"latitude\" property has been updated'] = shop['latitude'] === 56.8237;",
-									"    tests['\"latitude\" property has been updated'] = shop['longitude'] === 44.9211;",
 									"    ",
 									"    tests['Response has \"products\" property'] = shop.hasOwnProperty('products');",
 									"    tests['Response has \"products\" property is an Array'] = Array.isArray(shop['products']);",
@@ -1234,77 +1894,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:1337/api/shops/{{shopId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/shops/{{shopId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"shops",
 								"{{shopId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Product by ID from Shop by ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
-								"exec": [
-									"if(!(environment.isIntegrationTest)) {",
-									"var is200Response = responseCode.code === 200;",
-									"",
-									"tests['Response code is 200 OK'] = is200Response;",
-									"",
-									"if(is200Response){",
-									"    var responseJSON = JSON.parse(responseBody);",
-									"    var product = responseJSON.product || {};",
-									"",
-									"    tests['Response has \"_id\" property'] = product.hasOwnProperty('_id');",
-									"    tests['Response has \"name\" property'] = product.hasOwnProperty('name');",
-									"    tests['Response has \"description\" property'] = product.hasOwnProperty('description');",
-									"    tests['Response has \"quantity\" property'] = product.hasOwnProperty('quantity');",
-									"    ",
-									"    tests['\"name\" property has been updated'] = product['name'] === 'Honig';",
-									"    tests['\"description\" property has been updated'] = product['description'] === 'Bienenkotze';",
-									"}",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"product\": {\n\t\t\"name\": \"Honig\",\n\t\t\"description\": \"Bienenkotze\",\n\t\t\"quantity\": 1\n\t}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:1337/api/shops/{{shopId}}/products/{{productId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "1337",
-							"path": [
-								"api",
-								"shops",
-								"{{shopId}}",
-								"products",
-								"{{productId}}"
 							]
 						}
 					},
@@ -1353,12 +1953,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/shops/{{shopId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/shops/{{shopId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"shops",
@@ -1390,12 +1991,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:1337/api/shops/{{shopId}}",
-							"protocol": "http",
+							"raw": "https://kuro.tlahmann.com/api/shops/{{shopId}}",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"kuro",
+								"tlahmann",
+								"com"
 							],
-							"port": "1337",
 							"path": [
 								"api",
 								"shops",
@@ -1407,6 +2009,376 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Addresses",
+			"item": [
+				{
+					"name": "Get All Addresses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/addresses",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Address",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b7670d5d-4a65-4daa-9c23-257a7b34b268",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var address = responseJSON.address || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = address.hasOwnProperty('_id');",
+									"    tests['Response has \"address\" property'] = address.hasOwnProperty('address');",
+									"    tests['Response has \"address2\" property'] = address.hasOwnProperty('address2');",
+									"    tests['Response has \"district\" property'] = address.hasOwnProperty('district');",
+									"    tests['Response has \"city\" property'] = address.hasOwnProperty('city');",
+									"    tests['Response has \"postralCode\" property'] = address.hasOwnProperty('postralCode');",
+									"    ",
+									"    if (tests['Response has \"_id\" property']) {",
+									"        pm.globals.set('addressId', address._id);",
+									"        tests['Global variable \"addressId\" has been set'] = pm.globals.get('addressId') === address._id;",
+									"    }",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"address\": {\n\t\t\"address\": \"Beispielstraße 4\",\n\t\t\"address2\": null,\n\t\t\"district\": null,\n\t\t\"city\": \"Ulm\",\n\t\t\"postralCode\": \"89073\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/addresses",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Address by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var shop = responseJSON.shop || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = shop.hasOwnProperty('_id');",
+									"    tests['Response has \"name\" property'] = shop.hasOwnProperty('name');",
+									"    tests['Response has \"latitude\" property'] = shop.hasOwnProperty('latitude');",
+									"    tests['Response has \"longitude\" property'] = shop.hasOwnProperty('longitude');",
+									"    tests['Response has \"products\" property'] = shop.hasOwnProperty('products');",
+									"    tests['Response has \"products\" property is an Array'] = Array.isArray(shop['products']);",
+									"    tests['Response has \"createdAt\" property'] = shop.hasOwnProperty('createdAt');",
+									"    tests['Response\\'s \"createdAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.createdAt);",
+									"    tests['Response has \"updatedAt\" property'] = shop.hasOwnProperty('updatedAt');",
+									"    tests['Response\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = /^\\d{4,}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d+.\\d+(?:[+-][0-2]\\d:[0-5]\\d|Z)$/.test(shop.updatedAt);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/addresses/{{addressId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"addresses",
+								"{{addressId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Shops of Address by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c60ff2f3-9e1e-46c6-9d53-30b27f3f4245",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    tests['Response has \"ahop\" property'] = responseJSON.hasOwnProperty('ahop');",
+									"    tests['Response has \"ahop\" property is an Array'] = Array.isArray(responseJSON['ahop']);",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/addresses/{{addressId}}/shops",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"addresses",
+								"{{addressId}}",
+								"shops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Address by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f4f256b-42e1-4083-940e-5be3efcc553a",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var address = responseJSON.address || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = address.hasOwnProperty('_id');",
+									"    tests['Response has \"address\" property'] = address.hasOwnProperty('address');",
+									"    tests['Response has \"address2\" property'] = address.hasOwnProperty('address2');",
+									"    tests['Response has \"district\" property'] = address.hasOwnProperty('district');",
+									"    tests['Response has \"city\" property'] = address.hasOwnProperty('city');",
+									"    tests['Response has \"postralCode\" property'] = address.hasOwnProperty('postralCode');",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"address\": {\n\t\t\"address\": \"Beispielstraße 4\",\n\t\t\"address2\": \"1 Obergeschoss\",\n\t\t\"district\": null,\n\t\t\"city\": \"Ulm\",\n\t\t\"postralCode\": \"89074\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/addresses/{{addressId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"addresses",
+								"{{addressId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copy Address by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e3cab6ef-63af-49d6-bab0-4d74b4bb599b",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"    var address = responseJSON.address || {};",
+									"",
+									"    tests['Response has \"_id\" property'] = address.hasOwnProperty('_id');",
+									"    tests['Response has \"address\" property'] = address.hasOwnProperty('address');",
+									"    tests['Response has \"address2\" property'] = address.hasOwnProperty('address2');",
+									"    tests['Response has \"district\" property'] = address.hasOwnProperty('district');",
+									"    tests['Response has \"city\" property'] = address.hasOwnProperty('city');",
+									"    tests['Response has \"postralCode\" property'] = address.hasOwnProperty('postralCode');",
+									"    ",
+									"    if (tests['Response has \"_id\" property']) {",
+									"        pm.globals.set('addressId', address._id);",
+									"        tests['Global variable \"addressId\" has been set'] = pm.globals.get('addressId') === address._id;",
+									"    }",
+									"}",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/addresses/{{addressId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"addresses",
+								"{{addressId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Address by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c08bb810-624e-4362-ad92-73d77fb72843",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://kuro.tlahmann.com/api/addresses/{{addressId}}",
+							"protocol": "https",
+							"host": [
+								"kuro",
+								"tlahmann",
+								"com"
+							],
+							"path": [
+								"api",
+								"addresses",
+								"{{addressId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "93a66865-b527-4661-9cef-da90be284fc8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "731f5318-f95f-43cd-a48b-4079381e4776",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"protocolProfileBehavior": {}

@@ -1,8 +1,12 @@
 import { Schema, model, Model, Document } from 'mongoose';
 
 interface IAddress extends Document {
-  name: string;
-  description: string;
+  shop: any;
+  address: string;
+  address2: string;
+  district: string;
+  city: string;
+  postalCode: number;
 }
 interface IAddressModel extends Model<IAddress> {
 }
@@ -15,18 +19,19 @@ interface IAddressModel extends Model<IAddress> {
  * @string  address         the address string
  * @string  district        district name of the address
  * @string  city            city name of the address
- * @number  postralCode     the postral code associated with the address
+ * @number  postalCode      the postal code associated with the address
  * @string  createdAt       timestamp of the creation
  * @string  updatedAt       timestamp of the last update
  * 
  */
 var AddressSchema = new Schema({
   shop: { type: Schema.Types.ObjectId, ref: 'Shop' },
-  address: String,
-  address2: String,
-  district: String,
-  city: String,
-  postralCode: Number,
+  address: { type: String, text: true },
+  address2: { type: String, text: true },
+  district: { type: String, text: true },
+  city: { type: String, text: true },
+  postalCode: { type: Number, text: true },
 }, { timestamps: true, usePushEach: true });
+
 
 export default model<IAddress, IAddressModel>('Address', AddressSchema);

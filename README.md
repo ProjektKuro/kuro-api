@@ -40,7 +40,7 @@ Hier werden alle Infos bezüglich Dokumentation und weiteren Maßnahmen der Qual
 ### API
 
 Die API soll zu einem späteren Zeitpunkt noch mit Swagger UI dokumentiert werden, bisher kann "API Dokumentation" mit Hilfe der Postman-tests generieren.
-Dazu einfach dem Link folgen: [Postman API Documentation](https://documenter.getpostman.com/view/4294690/SzS8rjyg?version=latest)
+Dazu einfach dem Link folgen: [Postman API Documentation](https://documenter.getpostman.com/view/4294690/SzS8s5Jf?version=latest)
 
 ## Beteiligte
 

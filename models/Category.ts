@@ -1,8 +1,9 @@
 import { Schema, model, Model, Document } from 'mongoose';
 
 interface ICategory extends Document {
-  name: string;
-  description: string;
+  name: { type: String, text: true };
+  description: { type: String, text: true };
+  products: any[];
 }
 interface ICategoryModel extends Model<ICategory> {
 }
@@ -20,6 +21,7 @@ interface ICategoryModel extends Model<ICategory> {
 var CategorySchema = new Schema({
   name: String,
   description: String,
+  products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
 }, { timestamps: true, usePushEach: true });
 
 export default model<ICategory, ICategoryModel>('Category', CategorySchema);

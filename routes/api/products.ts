@@ -16,11 +16,12 @@ const productRoutes = Router();
 */
 productRoutes.get('',
   (req: Request, res: Response, next: NextFunction) => {
+    const perPage = +req.query.pageSize || 100;
+    const page = +req.query.page || 0;
+
     Product.find({})
-      .populate([
-        { path: 'shops', model: Shop },
-        { path: 'categories', model: Category }
-      ])
+      .limit(perPage)
+      .skip(perPage * page)
       .then((products) => {
         if (!products) { return res.sendStatus(404); }
 
@@ -47,7 +48,7 @@ productRoutes.post('',
 productRoutes.get('/:productId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
-      .populate({ path: 'shops', model: Shop })
+
       .then((product) => {
         if (!product) { return res.sendStatus(404); }
 
@@ -102,7 +103,7 @@ productRoutes.delete('/:productId',
 productRoutes.get('/:productId/shops',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
-      .populate({ path: 'shops', model: Shop })
+
       .then((product) => {
         if (!product) { return res.sendStatus(404); }
 
@@ -113,10 +114,7 @@ productRoutes.get('/:productId/shops',
 productRoutes.put('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
-      .populate([
-        { path: 'shops', model: Shop },
-        { path: 'categories', model: Category }
-      ])
+
       .then((product) => {
         if (!product) { return res.sendStatus(401); }
         // Find the store
@@ -127,11 +125,14 @@ productRoutes.put('/:productId/shops/:shopId',
             if (typeof req.body.shop.name !== 'undefined') {
               shop.name = req.body.shop.name;
             }
-            if (typeof req.body.shop.latitude !== 'undefined') {
-              shop.latitude = req.body.shop.latitude;
-            }
-            if (typeof req.body.shop.longitude !== 'undefined') {
-              shop.longitude = req.body.shop.longitude;
+            if (
+              typeof req.body.shop.latitude !== 'undefined' &&
+              typeof req.body.shop.longitude !== 'undefined'
+            ) {
+              shop.location = {
+                type: "Point",
+                coordinates: [req.body.shop.latitude, req.body.shop.longitude]
+              }
             }
 
             return shop.save().then(function () {
@@ -149,7 +150,10 @@ productRoutes.post('/:productId/shops/:shopId',
         return Product.findOneAndUpdate(
           { _id: req.params.productId },
           { $push: { shops: shop } })
-          .populate({ path: 'shops', model: Shop })
+          .populate([
+            { path: 'shops', model: Shop },
+            { path: 'categories', model: Category }
+          ])
           .then((product) => {
             if (!product) { return res.sendStatus(404); }
             return res.json({ shops: product.shops });
@@ -160,7 +164,7 @@ productRoutes.post('/:productId/shops/:shopId',
 productRoutes.delete('/:productId/shops/:shopId',
   (req: Request, res: Response, next: NextFunction) => {
     Product.findById(req.params.productId)
-      .populate({ path: 'shops', model: Shop })
+
       .then((product) => {
         if (!product) { return res.sendStatus(404); }
         // Find the store
