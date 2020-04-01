@@ -78,7 +78,7 @@
     "@types/slug": "^0.9.1",
     "@types/underscore": "^1.9.4",
     "babel-node": "0.0.1-security",
-    "mongoose": "^5.9.5",
+    "mongoose": "^5.7.5",
     "newman": "^3.8.2",
     "node-env-file": "^0.1.8",
     "nodemon": "^1.11.0",
