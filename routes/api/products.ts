@@ -80,7 +80,7 @@ productRoutes.put('/:productId',
       if (typeof req.body.product.categories !== 'undefined') {
         const c = req.body.product.categories
         if (!Array.isArray(c)) { return res.sendStatus(422); }
-        if (c.some(cat => typeof cat === 'string')) { return res.sendStatus(422); }
+        if (!c.some(cat => typeof cat === 'string')) { return res.sendStatus(422); }
         product.categories = c;
       }
 
