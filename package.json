@@ -1,6 +1,6 @@
 {
   "name": "kuro-api",
-  "version": "0.9.1-beta",
+  "version": "0.10.0-beta",
   "description": "REST Api for Kuro",
   "contributors": [
     {
