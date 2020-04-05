@@ -31,9 +31,21 @@ productRoutes.post('',
   (req: Request, res: Response, next: NextFunction) => {
     const product = new Product();
 
-    product.name = req.body.product.name;
-    product.description = req.body.product.description;
-    product.quantity = req.body.product.quantity;
+    // only update fields that were actually passed...
+    if (typeof req.body.product.name !== 'undefined') {
+      product.name = req.body.product.name;
+    }
+    if (typeof req.body.product.description !== 'undefined') {
+      product.description = req.body.product.description;
+    }
+    if (typeof req.body.product.categories !== 'undefined') {
+      const c = req.body.product.categories
+      if (Array.isArray(c)) {
+        if (c.every(cat => typeof cat === 'string')) {
+          product.categories = c;
+        }
+      }
+    }
 
     product.save().then(function () {
       return res.json({ product }); // .toAuthJSON() });
@@ -65,8 +77,11 @@ productRoutes.put('/:productId',
       if (typeof req.body.product.description !== 'undefined') {
         product.description = req.body.product.description;
       }
-      if (typeof req.body.product.quantity !== 'undefined') {
-        product.quantity = req.body.product.quantity;
+      if (typeof req.body.product.categories !== 'undefined') {
+        const c = req.body.product.categories
+        if (!Array.isArray(c)) { return res.sendStatus(422); }
+        if (c.some(cat => typeof cat === 'string')) { return res.sendStatus(422); }
+        product.categories = c;
       }
 
       return product.save().then(function () {
