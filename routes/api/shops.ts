@@ -55,11 +55,27 @@ shopRoutes.get('',
 shopRoutes.post('',
   (req: Request, res: Response, next: NextFunction) => {
     const shop = new Shop();
-
-    shop.name = req.body.shop.name;
-    shop.location = {
-      type: "Point",
-      coordinates: [req.body.shop.latitude, req.body.shop.longitude]
+    if (typeof req.body.shop.name !== 'undefined') {
+      shop.name = req.body.shop.name;
+    }
+    if (typeof req.body.shop.location !== 'undefined') {
+      if (
+        typeof req.body.shop.location.latitude !== 'undefined' &&
+        typeof req.body.shop.location.longitude !== 'undefined'
+      ) {
+        shop.location = {
+          type: "Point",
+          coordinates: [req.body.shop.location.latitude, req.body.shop.location.longitude]
+        }
+      }
+    }
+    if (typeof req.body.shop.products !== 'undefined') {
+      shop.products = req.body.shop.products;
+    }
+    if (typeof req.body.shop.stock !== 'undefined') {
+      typeof req.body.shop.stock.forEach(s =>
+        shop.stock.push({ product: s.product, quantity: s.quantity, updatedAt: new Date() })
+      );
     }
 
     shop.save().then(shop => {
@@ -106,15 +122,24 @@ shopRoutes.put('/:shopId',
         if (typeof req.body.shop.name !== 'undefined') {
           shop.name = req.body.shop.name;
         }
-        if (
-          typeof req.body.shop.latitude !== 'undefined' &&
-          typeof req.body.shop.longitude !== 'undefined'
-        ) {
-
-          shop.location = {
-            type: "Point",
-            coordinates: [req.body.shop.latitude, req.body.shop.longitude]
+        if (typeof req.body.shop.location !== 'undefined') {
+          if (
+            typeof req.body.shop.location.latitude !== 'undefined' &&
+            typeof req.body.shop.location.longitude !== 'undefined'
+          ) {
+            shop.location = {
+              type: "Point",
+              coordinates: [req.body.shop.location.latitude, req.body.shop.location.longitude]
+            }
           }
+        }
+        if (typeof req.body.shop.products !== 'undefined') {
+          shop.products = req.body.shop.products;
+        }
+        if (typeof req.body.shop.stock !== 'undefined') {
+          typeof req.body.shop.stock.forEach(s =>
+            shop.stock.push({ product: s.product, quantity: s.quantity, updatedAt: new Date() })
+          );
         }
 
         return shop.save().then(function () {
@@ -146,124 +171,6 @@ shopRoutes.delete('/:shopId',
         return res.json({ shop });
       });
     }).catch(next);
-  });
-
-shopRoutes.get('/:shopId/products',
-  (req: Request, res: Response, next: NextFunction) => {
-    const include = [];
-    if (req.query.include) {
-      let requestedIncludes = parseIncludes(req.query.include);
-      if (requestedIncludes.indexOf('products') !== -1) { include.push({ path: 'products', model: Product }); }
-      if (requestedIncludes.indexOf('address') !== -1) { include.push({ path: 'address', model: Address }); }
-    }
-    Shop.findById(req.params.shopId)
-      .populate(include)
-      .then(shop => {
-        if (!shop) {
-          return res.sendStatus(404);
-        }
-
-        return res.json({ products: shop.products });
-      })
-      .catch(next);
-  }
-);
-
-/**
- * Adds an existing product by id to a shop by id
- */
-shopRoutes.post('/:shopId/products/:productId',
-  (req: Request, res: Response, next: NextFunction) => {
-    Product.findById(req.params.productId)
-      .then((product) => {
-        if (!product) { return res.sendStatus(404); }
-        return Shop.findOneAndUpdate(
-          { _id: req.params.shopId },
-          { $push: { products: product } }).then((shop) => {
-            if (!shop) { return res.sendStatus(404); }
-            return res.json({ products: shop.products });
-          });
-      }).catch(next);
-  });
-
-/**
- * Updates a product by id in a shop by id
- */
-shopRoutes.put('/:shopId/products/:productId',
-  (req: Request, res: Response, next: NextFunction) => {
-    const include = [];
-    if (req.query.include) {
-      let requestedIncludes = parseIncludes(req.query.include);
-      if (requestedIncludes.indexOf('products') !== -1) { include.push({ path: 'products', model: Product }); }
-      if (requestedIncludes.indexOf('address') !== -1) { include.push({ path: 'address', model: Address }); }
-    }
-    Shop.findById(req.params.shopId)
-      .populate(include)
-      .then((shop) => {
-        if (!shop) { return res.sendStatus(401); }
-        // Find the store
-        return Product.findById(req.params.productId)
-          .then((product) => {
-            if (!product) { return res.sendStatus(404); }
-            // only update fields that were actually passed...
-            if (typeof req.body.product.name !== 'undefined') {
-              product.name = req.body.product.name;
-            }
-            if (typeof req.body.product.description !== 'undefined') {
-              product.description = req.body.product.description;
-            }
-            if (typeof req.body.product.quantity !== 'undefined') {
-              product.quantity = req.body.product.quantity;
-            }
-
-            return product.save().then(function () {
-              return res.json({ product });
-            });
-          });
-      }).catch(next);
-  }
-);
-
-shopRoutes.delete('/:shopId/products/:productId',
-  (req: Request, res: Response, next: NextFunction) => {
-    const include = [];
-    if (req.query.include) {
-      let requestedIncludes = parseIncludes(req.query.include);
-      if (requestedIncludes.indexOf('products') !== -1) { include.push({ path: 'products', model: Product }); }
-      if (requestedIncludes.indexOf('address') !== -1) { include.push({ path: 'address', model: Address }); }
-    }
-    Shop.findById(req.params.shopId)
-      .populate(include)
-      .then((shop) => {
-        if (!shop) { return res.sendStatus(404); }
-        // Find the product
-        return Product.findById(req.params.productId)
-          .then((product) => {
-            if (!product) { return res.sendStatus(404); }
-            return shop.update({ products: product._id }, {
-              '$pull': { products: product._id }
-            }).then(() => {
-              return res.json({ products: shop.products });
-            });
-          });
-      }).catch(next);
-  });
-
-/**
-* Adds an existing address by id to a shop by id
-*/
-shopRoutes.post('/:shopId/addresses/:addressId',
-  (req: Request, res: Response, next: NextFunction) => {
-    Address.findById(req.params.addressId)
-      .then((address) => {
-        if (!address) { return res.sendStatus(404); }
-        return Shop.findOneAndUpdate(
-          { _id: req.params.shopId },
-          { address: address }).then((shop) => {
-            if (!shop) { return res.sendStatus(404); }
-            return res.json({ address: shop.address });
-          });
-      }).catch(next);
   });
 
 export default shopRoutes;
